@@ -6,6 +6,7 @@ import AddUser from '@/components/AddUser'
 import UpdateUser from '@/components/UpdateUser'
 import Login from '@/components/Login'
 import Welcome from '@/components/Welcome'
+import Home from '@/components/Home'
 
 Vue.use(Router)
 
@@ -13,8 +14,8 @@ export default new Router({
   routes: [
     {
       path: '/home',
-      name: 'UserList',
-      component: UserList
+      name: 'Home',
+      component: Home
     },
     {
       path: '/adduser',
