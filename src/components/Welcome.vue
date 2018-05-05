@@ -25,17 +25,29 @@
             </button>
           </div>
           <div class="modal-body">
-             <form>
-            username:<br>
-            <input type="text" name="username" placeholder="username" v-model="User.username"><br><br>
-            password:<br>
-            <input type="password" name="psw" placeholder="password" v-model="User.password">
-            </form></div>
+          <div class="container-fluid">
+               <form>
+    <div class="form-group">
+      <label for="usr">Username</label>
+      <input type="text" class="form-control" id="usr" v-model="User.username">
+    </div>
+    <div class="form-group">
+      <label for="pwd">Password</label>
+      <input type="password" class="form-control" id="pwd" v-model="User.password">
+    </div>
 
-             <router-link to="/home" class="btn btn-primary" tag="button" type="button">
+    <router-link to="/home" class="btn btn-primary" tag="button" type="button">
               <span @click="delUser(uid)">login</span>
             </router-link>
 
+  </form>
+          </div>
+            
+            
+            
+            </div>
+
+             
             
          
         </div>
@@ -52,13 +64,28 @@
             </button>
           </div>
           <div class="modal-body">
-            Are you sure you want to delete this item? </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <router-link to="/home" class="btn btn-danger" tag="button" type="button">
-              <span @click="delUser(uid)">Delete</span>
+                        <form>
+    <div class="form-group">
+      <label for="usr">Username</label>
+      <input type="text" class="form-control" id="usr" v-model="User.username">
+    </div>
+    <div class="form-group">
+      <label for="pwd">Password</label>
+      <input type="password" class="form-control" id="pwd" v-model="User.password">
+    </div>
+    <div class="form-group">
+      <label for="pwd">Confirm Password</label>
+      <input type="password" class="form-control" id="conpwd" v-model="User.confirmPassword">
+    </div>
+
+    <router-link to="/home" class="btn btn-primary" tag="button" type="button">
+              <span @click="delUser(uid)">Register</span>
             </router-link>
+
+  </form>
+  
           </div>
+         
         </div>
       </div>
     </div>
@@ -185,7 +212,7 @@ export default {
   min-width: 100%;
   min-height: 100%;
   /* filter: contrast(50%); */
-
+z-index:-5;
   /* filter: grayscale(20%); */
 
 

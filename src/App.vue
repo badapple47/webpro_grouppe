@@ -1,32 +1,10 @@
 <template>
-  <div id="app">
-    <router-view/>
-        <!-- <nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container-fluid">
-    <div class="navbar-header ">
-      <a class="navbar-brand " href="#/home">
-      
-        <img id="logo-grouppe" alt="Brand" src="../static/img/grouppe.png" >
- 
-      </a>
+  <div id="app" >
+    
 
-      
-    </div>
 
-    Hi
 
-    <form class="navbar-form navbar-right">
-      
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
-
-  </div>
-</nav> -->
-
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-default navbar-fixed-top" style="background-color:white;">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -41,7 +19,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Directory</a></li>
+        <li><a href="#/directory">Directory</a></li>
       
       </ul>
       <form class="navbar-form navbar-left">
@@ -51,15 +29,14 @@
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
+     
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
+            <li><a href="#">Edit Profile</a></li>
+        
             <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
+            <li><a href="#">Logout</a></li>
           </ul>
         </li>
       </ul>
@@ -67,13 +44,20 @@
   </div><!-- /.container-fluid -->
 </nav>
 
-
+<router-view/>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  data () {
+    return {
+       
+       
+       
+    }
+  }
 }
 </script>
 
@@ -85,6 +69,10 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+   -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 #logo-grouppe{
