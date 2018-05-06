@@ -64,7 +64,7 @@
   
       <div class="col-sm-6 col-md-3" v-for="users in filteredUsers" v-bind:key="users._id">
         <div class="thumbnail">
-          <img id="profile-img" v-bind:src=u sers.imageUrl />
+          <img id="profile-img" v-bind:src= users.imageUrl />
           <div class="caption">
             <h3>{{users.firstName}} {{users.lastName}}</h3>
             <p>{{users.mobileNo}}</p>
@@ -158,6 +158,7 @@
       // if(localStorage.getItem('Token') == null){
       //   window.location.href = "http://localhost:8080/#/"
       // }
+   
       axios
         .get("http://localhost:8082/users")
         .then(response => {

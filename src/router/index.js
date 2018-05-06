@@ -9,6 +9,7 @@ import Welcome from '@/components/Welcome'
 import Home from '@/components/Home'
 import Directory from '@/components/Directory'
 
+
 Vue.use(Router)
 
 export default new Router({
@@ -43,6 +44,7 @@ export default new Router({
       name: 'Directory',
       component: Directory
     },
+
 
   ]
 
