@@ -114,7 +114,11 @@ export default {
           console.log(error)
         })
     }
+  },
+  mounted() {
+   localStorage.setItem('Header', 'true');
   }
+
 }
 
 </script>

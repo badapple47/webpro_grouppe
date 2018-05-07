@@ -12,8 +12,8 @@
 
        <h4 id="welcome-quote"> Grouppe คือสารานุกรมชาว EGMU ที่คุณจะไม่พลาดทุกการติดต่อ กับเพื่อนๆ พี่ๆ น้องๆ ชาววิศวะมหิดล </h4>
 
-    <button id="login-modal"class="btn btn-default" data-toggle="modal" data-target=".login-modal" @click="DELETE(users._id)">login</button>
-    <button id="register-modal"class="btn btn-primary" data-toggle="modal" data-target=".register-modal" @click="DELETE(users._id)">register</button>
+    <button id="login-modal"class="btn btn-default" data-toggle="modal" data-target=".login-modal" >login</button>
+    <button id="register-modal"class="btn btn-primary" data-toggle="modal" data-target=".register-modal" >register</button>
 
        <div class="modal fade login-modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -29,15 +29,15 @@
                <form>
     <div class="form-group">
       <label for="usr">Username</label>
-      <input type="text" class="form-control" id="usr" v-model="User.username">
+      <input type="text" class="form-control"  v-model="User.username">
     </div>
     <div class="form-group">
       <label for="pwd">Password</label>
-      <input type="password" class="form-control" id="pwd" v-model="User.password">
+      <input type="password" class="form-control"  v-model="User.password">
     </div>
 
-    <router-link to="/home" class="btn btn-primary" tag="button" type="button">
-              <span @click="delUser(uid)">login</span>
+    <router-link data-dismiss="modal" to="/home" class="btn btn-primary" tag="button" type="button">
+              <span >login</span>
             </router-link>
 
   </form>
@@ -78,8 +78,8 @@
       <input type="password" class="form-control" id="conpwd" v-model="User.confirmPassword">
     </div>
 
-    <router-link to="/home" class="btn btn-primary" tag="button" type="button">
-              <span @click="delUser(uid)">Register</span>
+    <router-link data-dismiss="modal" to="/home" class="btn btn-primary" tag="button" type="button">
+              <span >Register</span>
             </router-link>
 
   </form>
@@ -115,6 +115,10 @@ export default {
   },
   methods: {
 
+  },
+  mounted(){
+    
+    localStorage.removeItem("Header");
   }
 }
 
