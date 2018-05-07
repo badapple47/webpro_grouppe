@@ -8,6 +8,7 @@ import Login from '@/components/Login'
 import Welcome from '@/components/Welcome'
 import Home from '@/components/Home'
 import Directory from '@/components/Directory'
+import NewsDetail from '@/components/NewsDetail'
 
 
 Vue.use(Router)
@@ -44,8 +45,11 @@ export default new Router({
       name: 'Directory',
       component: Directory
     },
-
-
+    {
+      path: '/newsdetail',
+      name: 'NewsDetail',
+      component: NewsDetail
+    },
   ]
 
 })
