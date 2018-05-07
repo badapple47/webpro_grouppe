@@ -52,12 +52,13 @@
           <input type="text" class="form-control" placeholder="Name-Surname">
         </div>
         <div class="form-group" >
-          <label class="pull-left">เลขประจำตัวประชาชน<small style="color:grey;">*ไม่เปิดเผยต่อสาธารณะ</small></label>
+          <label class="pull-left">เลขประจำตัวประชาชน<small style="color:grey;"> *ไม่เปิดเผยต่อสาธารณะ</small></label>
           <input type="text" class="form-control" placeholder="เลขประจำตัวประชาชน" >
         </div>
         <div class="form-group" >
           <label class="pull-left">ภาค</label>
           <select name="ภาค" style="width: 100%;">
+      <option selected disabled>ภาค</option>      
     <option value="เครื่องกล">เครื่องกล</option>
     <option value="saab">เคมี</option>
     <option value="fiat">โยธา</option>
@@ -98,13 +99,15 @@
           <input type="text" class="form-control" placeholder="http://gogole.com" >
         </div>
       
+<br>
 
-         <button  tag="button" type="submit" class="btn btn-large btn-block btn-primary full-width" >
+         <button  tag="button" type="button" class="btn btn-large btn-block btn-primary center-block" style="width : 50%;" >
        
         Submit
       </button>
 
-      <router-link to="/home" tag="button" class="btn btn-large btn-block btn-success full-width" type="button">
+<br>
+      <router-link to="/home" tag="button" class="btn btn-large btn-block btn-success center-block" type="button" style="width : 50%;">
         <span>Back to User Page</span>
       </router-link>
       </div>
@@ -176,6 +179,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+
+
 h1, h2 {
   font-weight: normal;
 }

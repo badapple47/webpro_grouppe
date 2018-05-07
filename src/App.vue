@@ -1,7 +1,7 @@
 <template>
   <div id="app" >
     
-
+<router-view></router-view>
 
 
 <nav class="navbar navbar-default navbar-fixed-top" style="background-color:white;">
@@ -44,7 +44,7 @@
   </div><!-- /.container-fluid -->
 </nav>
 
-<router-view/>
+
   </div>
 </template>
 

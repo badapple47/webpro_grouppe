@@ -41,9 +41,13 @@
     รุ่น <span class="caret"></span>
   </button>
   <ul class="dropdown-menu">
-    <li><a href="#">รุ่น 25</a></li>
-    <li><a href="#">รุ่น 24</a></li>
-    <li><a href="#">รุ่น 23</a></li>
+    <li><a href="#">เครื่องกล</a></li>
+    <li><a href="#">เคมี</a></li>
+    <li><a href="#">โยธา</a></li>
+    <li><a href="#">คอม</a></li>
+    <li><a href="#">อุตสาหการ</a></li>
+    <li><a href="#">ไฟฟ้า</a></li>
+    <li><a href="#">ชีวะการแพทย์</a></li>
     <li role="separator" class="divider"></li>
     <li><a href="#">อาจารย์ & การศึกษา</a></li>
   </ul>
