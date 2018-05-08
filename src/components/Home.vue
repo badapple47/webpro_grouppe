@@ -6,12 +6,12 @@
 				<div class="head">
 					<div class="row">
 						<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-							<div class="label-title"><h3>Event</h3></div>
+							<div class="label-title" ><h3>Event</h3></div>
 						</div>
 					</div>
 				</div>
 				<div class="lastest-event col-xs-12 col-sm-5 col-md-4 col-lg-4">
-					<div class="card event-card">
+					<div class="card event-card" >
 						<div class="lastest-card-body">
 							<div class="row">
 								<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -114,7 +114,20 @@ export default {
           console.log(error)
         })
     }
+  },
+  mounted() {
+		 if (localStorage.getItem('reloaded')) {
+        // The page was just reloaded. Clear the value from local storage
+        // so that it will reload the next time this page is visited.
+        localStorage.removeItem('reloaded');
+    } else {
+        // Set a flag so that we know not to reload the page twice.
+        localStorage.setItem('reloaded', '1');
+        location.reload();
+    }
+   localStorage.setItem('Header', 'true');
   }
+
 }
 
 </script>

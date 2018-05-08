@@ -41,9 +41,13 @@
     รุ่น <span class="caret"></span>
   </button>
   <ul class="dropdown-menu">
-    <li><a href="#">รุ่น 25</a></li>
-    <li><a href="#">รุ่น 24</a></li>
-    <li><a href="#">รุ่น 23</a></li>
+    <li><a href="#">เครื่องกล</a></li>
+    <li><a href="#">เคมี</a></li>
+    <li><a href="#">โยธา</a></li>
+    <li><a href="#">คอม</a></li>
+    <li><a href="#">อุตสาหการ</a></li>
+    <li><a href="#">ไฟฟ้า</a></li>
+    <li><a href="#">ชีวะการแพทย์</a></li>
     <li role="separator" class="divider"></li>
     <li><a href="#">อาจารย์ & การศึกษา</a></li>
   </ul>
@@ -64,7 +68,7 @@
   
       <div class="col-sm-6 col-md-3" v-for="users in filteredUsers" v-bind:key="users._id">
         <div class="thumbnail">
-          <img id="profile-img" v-bind:src=u sers.imageUrl />
+          <img id="profile-img" v-bind:src= users.imageUrl />
           <div class="caption">
             <h3>{{users.firstName}} {{users.lastName}}</h3>
             <p>{{users.mobileNo}}</p>
@@ -75,7 +79,7 @@
           <router-link :to="{ path: 'updateuser/' + users._id}" class="btn btn-xs btn-warning" tag="button" type="button">
             <span class="glyphicon glyphicon-pencil"></span>
           </router-link>
-          <button class="btn btn-xs btn-danger" data-toggle="modal" data-target=".bd-example-modal-sm" @click="DELETE(users._id)"><span class="glyphicon glyphicon-trash"></span></button>
+          <button class="btn btn-xs btn-danger" data-toggle="modal" data-target=".bd-example-modal-sm" ><span class="glyphicon glyphicon-trash"></span></button>
         </div>
       </div>
   
@@ -83,26 +87,7 @@
     </div>
   
   
-    <div class="modal fade bd-example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title" id="exampleModalLabel">Are you sure?</h1>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-          </div>
-          <div class="modal-body">
-            Are you sure you want to delete this item? </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <router-link to="/home" class="btn btn-danger" tag="button" type="button">
-              <span @click="delUser(uid)">Delete</span>
-            </router-link>
-          </div>
-        </div>
-      </div>
-    </div>
+    
   
   
   
@@ -122,23 +107,6 @@
       };
     },
     methods: {
-      delUser(userId) {
-        var url = "http://localhost:8082/users/" + userId;
-        axios
-          .delete(url)
-          .then(response => {
-            console.log("Delete UserId: " + userId);
-          })
-          .catch(error => {
-            console.log(error);
-          });
-        window.location.reload();
-      },
-      DELETE(id) {
-        // eslint-disable-next-line
-        $("#my-modal").modal("show");
-        this.uid = id;
-      },
       logout() {
         localStorage.removeItem("Token");
         window.location.href = "http://localhost:8080/#/";
@@ -154,10 +122,17 @@
       }
     },
     mounted() {
-      //     console.log("Mounnted")
-      // if(localStorage.getItem('Token') == null){
-      //   window.location.href = "http://localhost:8080/#/"
-      // }
+       if (localStorage.getItem('reloaded')) {
+        // The page was just reloaded. Clear the value from local storage
+        // so that it will reload the next time this page is visited.
+        localStorage.removeItem('reloaded');
+    } else {
+        // Set a flag so that we know not to reload the page twice.
+        localStorage.setItem('reloaded', '1');
+        location.reload();
+    }
+   localStorage.setItem('Header', 'true');
+   
       axios
         .get("http://localhost:8082/users")
         .then(response => {

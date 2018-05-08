@@ -1,9 +1,20 @@
 <template>
+
   <div class="container">
+    <img class="text-left" id="bg" v-bind:src='"../../static/img/wallpaper.png"' height="600" width="1200" />
     <form>
-      <div class="well">
+      <div class="col-md-6 col-md-offset-3">
+      <div class="well" >
         <h4>Update User</h4>
-        <div class="form-group" >
+        <div class="row">
+
+
+      <img class="img-responsive center-block" id="profile-img"  v-bind:src= User.imageUrl />
+  
+
+
+</div>
+        <!-- <div class="form-group" >
           <label class="pull-left">Contact ID </label>
           <input type="text" class="form-control" placeholder="Contact ID" v-model="User.contactId">
         </div>
@@ -30,21 +41,82 @@
         <div class="form-group" >
           <label class="pull-left">Image Url </label>
           <input type="text" class="form-control" placeholder="Image Url" v-model="User.imageUrl">
+        </div> -->
+
+        <div class="form-group" >
+          <label class="pull-left">ชื่อ-นามสกุล</label>
+          <input type="text" class="form-control" placeholder="ชื่อ-นามสกุล">
         </div>
-      </div>
-      <button  tag="button" type="submit" class="btn btn-large btn-block btn-primary full-width" @click="updateToAPI">
-        <!-- <span @click="updateToAPI">Submit</span> -->
+        <div class="form-group" >
+          <label class="pull-left">Name-Surname</label>
+          <input type="text" class="form-control" placeholder="Name-Surname">
+        </div>
+        <div class="form-group" >
+          <label class="pull-left">เลขประจำตัวประชาชน<small style="color:grey;"> *ไม่เปิดเผยต่อสาธารณะ</small></label>
+          <input type="text" class="form-control" placeholder="เลขประจำตัวประชาชน" >
+        </div>
+        <div class="form-group" >
+          <label class="pull-left">ภาค</label>
+          <select name="ภาค" style="width: 100%;">
+      <option selected disabled>ภาค</option>      
+    <option value="เครื่องกล">เครื่องกล</option>
+    <option value="saab">เคมี</option>
+    <option value="fiat">โยธา</option>
+    <option value="audi">คอม</option>
+    <option value="audi">อุตสาหะการ</option>
+    <option value="audi">ไฟฟ้า</option>
+    <option value="audi">ชีวะการแพทย์</option>
+  </select>
+        </div>
+
+        
+        <div class="form-group" >
+          <label class="pull-left">รหัสนักศึกษา</label>
+          <input type="text" class="form-control" placeholder="รหัสนักศึกษา">
+        </div>
+        <div class="form-group">
+          <label class="pull-left">Image Url </label>
+          <input type="text" class="form-control" placeholder="Image Url" v-model="User.imageUrl">
+        </div> 
+
+        
+</br>
+        <hr style="border-color:white; border-style:solid;">
+        </br>
+
+        <h3>ข้อมูลติดต่อ</h3>
+        
+        <div class="form-group" >
+          <label class="pull-left">อีเมลล์</label>
+          <input type="text" class="form-control" placeholder="johnmedapple@gmail.com" >
+        </div>
+        <div class="form-group" >
+          <label class="pull-left">เบอร์ติดต่อ</label>
+          <input type="text" class="form-control" placeholder="086XXXXXXX">
+        </div>
+        <div class="form-group" >
+          <label class="pull-left">เว็บไซต์</label>
+          <input type="text" class="form-control" placeholder="http://gogole.com" >
+        </div>
+      
+<br>
+
+         <button  tag="button" type="button" class="btn btn-large btn-block btn-primary center-block" style="width : 50%;" >
+       
         Submit
       </button>
-      <!-- <router-link to="/home" tag="button" type="submit" class="btn btn-large btn-block btn-primary full-width">
-        <span @click="updateToAPI">Submit</span>
-      </router-link> -->
-      <router-link to="/home" tag="button" class="btn btn-large btn-block btn-success full-width" type="button">
+
+<br>
+      <router-link to="/home" tag="button" class="btn btn-large btn-block btn-success center-block" type="button" style="width : 50%;">
         <span>Back to User Page</span>
       </router-link>
+      </div>
+     
       <!-- <button class="btn btn-default" role="button" @click="updateToAPI">Button</button> -->
+      </div>
     </form>
   </div>
+
 
 </template>
 
@@ -62,7 +134,7 @@ export default {
         contactId: '',
         mobileNo: '',
         facebook: '',
-        imageUrl: ''
+        imageUrl: 'https://www.iphone-droid.net/wp-content/uploads/2013/09/Mamegoma-icon.png'
       }
     }
   },
@@ -107,6 +179,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+
+
 h1, h2 {
   font-weight: normal;
 }
@@ -121,4 +196,26 @@ li {
 a {
   color: #42b983;
 }
+  #bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* Preserve aspet ratio */
+    min-width: 100%;
+    min-height: 100%;
+    /* filter: contrast(50%); */
+    z-index: -5;
+    /* filter: grayscale(20%); */
+  }
+
+  #profile-img{
+     border: 1px solid #ddd;
+width: 30%;
+height: 10%;
+margin-top: 5%;
+margin-bottom: 5%;
+
+  }
+
+
 </style>

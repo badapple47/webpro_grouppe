@@ -9,6 +9,8 @@ import Welcome from '@/components/Welcome'
 import Home from '@/components/Home'
 import Directory from '@/components/Directory'
 import NewsDetail from '@/components/NewsDetail'
+import EventDetail from '@/components/EventDetail'
+
 
 Vue.use(Router)
 
@@ -48,6 +50,11 @@ export default new Router({
       path: '/newsdetail',
       name: 'NewsDetail',
       component: NewsDetail
+    },
+    {
+      path: '/eventdetail',
+      name: 'EventDetail',
+      component: EventDetail
     },
   ]
 
