@@ -117,8 +117,8 @@ export default {
 
     register () {
       let newUser = {
-        firstName: this.User.username,
-        lastName: this.User.password,
+        username: this.User.username,
+        password: this.User.password,
       }
       console.log(newUser)
       axios.post('http://localhost:8082/register', newUser)
