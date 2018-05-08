@@ -10,42 +10,46 @@
 						</div>
 					</div>
 				</div>
-				<div class="lastest-event col-xs-12 col-sm-5 col-md-4 col-lg-4">
-					<div class="card event-card" >
-						<div class="lastest-card-body">
-							<div class="row">
-								<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-									<div class="mounth">ส.ค.</div>
-									<div class="day">26</div>
+				<router-link to="eventdetail">
+					<div class="lastest-event col-xs-12 col-sm-5 col-md-4 col-lg-4">
+						<div class="card event-card" >
+							<div class="lastest-card-body">
+								<div class="row">
+									<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+										<div class="mounth">ส.ค.</div>
+										<div class="day">26</div>
+									</div>
+									<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+										<h4 class="card-title"><b>Bike for มันส์</b></h4>
+									</div>
 								</div>
-								<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-									<h4 class="card-title"><b>Bike for มันส์</b></h4>
-								</div>
-							</div>
-							<div class="event-detail">
-								<p class="card-text">ปั่นจักรยานสามขารอบมหิดลสิทธาคาร</p>
-							</div>
-						</div>
-						<span>
-							<img class="lastest-card-img" src="https://pbs.twimg.com/media/DKnclXMVoAA_lcf.jpg" alt="Card image cap">
-						</span>
-					</div>
-				</div>
-				<div class="list-event col-xs-12 col-sm-7 col-md-8 col-lg-8">
-					<div class="row">
-						<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4" v-for="i in 6" >
-							<div class="card event-card">
-								<span>
-									<img class="card-img-top" src="https://pbs.twimg.com/media/DKnclXMVoAA_lcf.jpg" alt="Card image cap">
-								</span>
-								<div class="card-body">
-									<h5 class="card-title"><b>Event1</b></h5>
-									<p class="card-text">26 ส.ค.</p>
+								<div class="event-detail">
+									<p class="card-text">ปั่นจักรยานสามขารอบมหิดลสิทธาคาร</p>
 								</div>
 							</div>
+							<span>
+								<img class="lastest-card-img" src="https://pbs.twimg.com/media/DKnclXMVoAA_lcf.jpg" alt="Card image cap">
+							</span>
 						</div>
 					</div>
-				</div> <!-- list-event -->
+				</router-link>
+				<router-link to="eventdetail">
+					<div class="list-event col-xs-12 col-sm-7 col-md-8 col-lg-8">
+						<div class="row">
+							<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4" v-for="i in 6" >
+								<div class="card event-card">
+									<span>
+										<img class="card-img-top" src="https://pbs.twimg.com/media/DKnclXMVoAA_lcf.jpg" alt="Card image cap">
+									</span>
+									<div class="card-body">
+										<h5 class="card-title"><b>Event1</b></h5>
+										<p class="card-text">26 ส.ค.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div> <!-- list-event -->
+				</router-link>
 			</div>
 			<div class="news">
 				<div class="head">
@@ -178,6 +182,7 @@ export default {
 }
 .event-card{
 	border: 0px;
+	color: black;
 }
 .lastest-card-body{
   padding: 0px 10px 10px 10px;
