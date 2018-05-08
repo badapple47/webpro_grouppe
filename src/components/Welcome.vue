@@ -78,7 +78,7 @@
       <input type="password" class="form-control" id="conpwd" v-model="User.confirmPassword">
     </div>
 
-    <router-link data-dismiss="modal" to="/home" class="btn btn-primary" tag="button" type="button">
+    <router-link data-dismiss="modal" to="/home"  @click="addToAPI" class="btn btn-primary" tag="button" type="button">
               <span >Register</span>
             </router-link>
 
@@ -114,6 +114,27 @@ export default {
     }
   },
   methods: {
+
+    addToAPI () {
+      let newUser = {
+        firstName: this.User.username,
+        lastName: this.User.password,
+        // email: this.User.email,
+        // contactId : this.User.contactId,
+        // mobileNo : this.User.mobileNo,
+        // facebook: this.User.facebook,
+        // imageUrl: this.User.imageUrl
+      }
+      console.log(newUser)
+      axios.post('http://localhost:8082/register', newUser)
+        .then((response) => {
+          console.log(response)
+          window.location.href = "http://localhost:8080/#/home"
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
 
   },
   mounted(){

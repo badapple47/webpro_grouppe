@@ -134,7 +134,7 @@
    localStorage.setItem('Header', 'true');
    
       axios
-        .get("http://localhost:8082/users")
+        .get("http://localhost:8082/alumnia")
         .then(response => {
           console.log(response.data);
           this.Users = response.data;
