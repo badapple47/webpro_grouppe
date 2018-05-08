@@ -125,7 +125,21 @@ export default {
         localStorage.setItem('reloaded', '1');
         location.reload();
     }
-   localStorage.setItem('Header', 'true');
+	 localStorage.setItem('Header', 'true');
+	 
+	 console.log("Mounted")
+    if(localStorage.getItem('Token') == null){
+      window.location.href = "http://localhost:8080/#/"
+    }
+    axios.get('http://localhost:8082/alumnia')
+      .then((response) => {
+        console.log(response.data)
+        this.Users = response.data
+      })
+      .catch((error) => {
+        console.log(error)
+			})
+			
   }
 
 }

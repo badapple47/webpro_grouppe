@@ -113,7 +113,7 @@ window.location.href = "http://localhost:8080/#/"
     }
   },
   mounted () {
-        console.log("Mounnted")
+        console.log("Mounted")
     if(localStorage.getItem('Token') == null){
       window.location.href = "http://localhost:8080/#/"
     }
