@@ -141,9 +141,10 @@ export default {
       axios.post('http://localhost:8082/authen', newUser)
         .then((response) => {
           console.log(response.data)
-          if(response.data == "success"){
+          if(response.data.note == "success"){
             console.log("authen success")
             localStorage.setItem('Token', 'asdasdasdasd');
+            localStorage.setItem('userID', response.data.userID);
            window.location.href = "http://localhost:8080/#/home"
 
           }
