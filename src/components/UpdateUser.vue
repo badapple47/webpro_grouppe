@@ -44,7 +44,7 @@
         </div> -->
 
         <div class="form-group" >
-          <label class="pull-left">ชื่อ-นามสกุล</label>
+          <label class="pull-left">ชื่อ-นามสกุล *</label>
           <input type="text" class="form-control" placeholder="ชื่อ-นามสกุล">
         </div>
         <div class="form-group" >
@@ -71,7 +71,7 @@
 
         
         <div class="form-group" >
-          <label class="pull-left">รหัสนักศึกษา</label>
+          <label class="pull-left">รหัสนักศึกษา *</label>
           <input type="text" class="form-control" placeholder="รหัสนักศึกษา">
         </div>
         <div class="form-group">

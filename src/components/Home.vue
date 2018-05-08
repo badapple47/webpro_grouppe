@@ -79,7 +79,30 @@
 					</div>
 				</div>
 			</div>
-		</div> <!-- container -->
+		</div>
+		
+		    <div class="modal fade bd-example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title" id="exampleModalLabel">Are you sure?</h1>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Are you sure you want to delete this item? </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <router-link to="/home" class="btn btn-danger" tag="button" type="button">
+              <span @click="delUser(uid)">Delete</span>
+            </router-link>
+          </div>
+        </div>
+      </div>
+    </div>
+		
+ <!-- container -->
   </div>
 </template>
 
@@ -89,6 +112,7 @@ export default {
   name: 'home',
   data () {
     return {
+			 modalShown: false ,
       msg: 'EGCO427',
        User: {
         username: '',
@@ -117,6 +141,9 @@ export default {
         .catch((error) => {
           console.log(error)
         })
+		},
+		  toggleModal() {
+        this.modalShown = !this.modalShown;
     }
   },
   mounted() {
@@ -137,8 +164,9 @@ export default {
     }
     axios.get('http://localhost:8082/alumnia')
       .then((response) => {
-        console.log(response.data)
-        this.Users = response.data
+				console.log(response.data)
+				
+        // this.Users = response.data
       })
       .catch((error) => {
         console.log(error)
