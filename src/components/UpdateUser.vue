@@ -152,7 +152,7 @@ export default {
         imageUrl: this.User.imageUrl
       }
       console.log(newUser)
-      axios.post('http://localhost:8082/users/' + this.$route.params.userId, newUser)
+      axios.post('http://localhost:8082/updatealumnia/' + this.$route.params.userId, newUser)
         .then((response) => {
           console.log(response)
           // window.location.href = "http://localhost:8080/#/home"
@@ -165,7 +165,7 @@ export default {
     }
   },
   mounted () {
-    axios.get('http://localhost:8082/users/' + this.$route.params.userId)
+    axios.get('http://localhost:8082/updatealumia/' + this.$route.params.userId)
       .then((response) => {
         // console.log(response.data)
         this.User = response.data
