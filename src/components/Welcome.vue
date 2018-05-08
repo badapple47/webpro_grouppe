@@ -36,7 +36,7 @@
       <input type="password" class="form-control"  v-model="User.password">
     </div>
 
-    <router-link data-dismiss="modal" to="/home" class="btn btn-primary" tag="button" type="button">
+    <router-link data-dismiss="modal" to="/home" class="btn btn-primary" tag="button" type="button" @click="login">
               <span >login</span>
             </router-link>
 
