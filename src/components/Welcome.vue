@@ -78,9 +78,9 @@
       <input type="password" class="form-control" id="conpwd" v-model="User.confirmPassword">
     </div>
 
-    <router-link data-dismiss="modal" to="/home"  @click="register" class="btn btn-primary" tag="button" type="button">
+    <button data-dismiss="modal" to="/home"  @click="register" class="btn btn-primary" tag="button" type="button">
               <span >Register</span>
-            </router-link>
+            </button>
 
   </form>
   
@@ -124,7 +124,7 @@ export default {
       axios.post('http://localhost:8082/register', newUser)
         .then((response) => {
           console.log(response)
-          window.location.href = "http://localhost:8080/#/home"
+          
         })
         .catch((error) => {
           console.log(error)

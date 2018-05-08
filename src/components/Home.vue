@@ -132,9 +132,9 @@ export default {
 	 localStorage.setItem('Header', 'true');
 	 
 	 console.log("Mounted")
-    if(localStorage.getItem('Token') == null){
-      window.location.href = "http://localhost:8080/#/"
-    }
+    // if(localStorage.getItem('Token') == null){
+    //   window.location.href = "http://localhost:8080/#/"
+    // }
     axios.get('http://localhost:8082/alumnia')
       .then((response) => {
         console.log(response.data)
