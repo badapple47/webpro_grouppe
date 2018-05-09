@@ -10,25 +10,31 @@
 						</div>
 					</div>
 				</div>
+					<div class="jumbotron">
+													<h1>Hello, world!</h1>
+													<p>...</p>
+													<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+												</div>
+												
 				<router-link to="eventdetail">
 					<div class="lastest-event col-xs-12 col-sm-5 col-md-4 col-lg-4">
 						<div class="card event-card" >
 							<div class="lastest-card-body">
 								<div class="row">
 									<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-										<div class="mounth">ส.ค.</div>
-										<div class="day">26</div>
+										<div class="mounth">{{events[0].monthStart}}</div>
+										<div class="day">{{events[0].dayStart}}</div>
 									</div>
 									<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-										<h4 class="card-title"><b>Bike for มันส์</b></h4>
+										<h4 class="card-title"><b>{{events[0].event}}</b></h4>
 									</div>
 								</div>
 								<div class="event-detail">
-									<p class="card-text">ปั่นจักรยานสามขารอบมหิดลสิทธาคาร</p>
+									<p class="card-text">@Mahidol Salaya</p>
 								</div>
 							</div>
 							<span>
-								<img class="lastest-card-img" src="https://pbs.twimg.com/media/DKnclXMVoAA_lcf.jpg" alt="Card image cap">
+								<img class="lastest-card-img" v-bind:src= events[0].image alt="Card image cap">
 							</span>
 						</div>
 					</div>
@@ -36,14 +42,14 @@
 				<router-link to="eventdetail">
 					<div class="list-event col-xs-12 col-sm-7 col-md-8 col-lg-8">
 						<div class="row">
-							<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4" v-for="i in 6" >
+							<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4" v-for="event in filteredUsers" >
 								<div class="card event-card">
 									<span>
-										<img class="card-img-top" src="https://pbs.twimg.com/media/DKnclXMVoAA_lcf.jpg" alt="Card image cap">
+										<img class="card-img-top" v-bind:src= event.image alt="Card image cap">
 									</span>
 									<div class="card-body">
-										<h5 class="card-title"><b>Event1</b></h5>
-										<p class="card-text">26 ส.ค.</p>
+										<h5 class="card-title"><b>{{event.event}}</b></h5>
+										<p class="card-text">{{event.dayStart}} {{events[0].monthStart}}</p>
 									</div>
 								</div>
 							</div>
@@ -51,16 +57,20 @@
 					</div> <!-- list-event -->
 				</router-link>
 			</div>
+			
 			<div class="news">
 				<div class="head">
 					<div class="row">
 						<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
 							<div class="label-title"><h3>News</h3></div>
 						</div>
+																	
 					</div>
+					
 				</div>
+				
 				<div class="row">
-					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" v-for="i in 6" >
+					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4" v-for="i in 3" >
 						<div class="card news-card">
 							<span>
 								<img class="news-card-img" src="https://pbs.twimg.com/media/DKnbzS3UMAAra8W.jpg:large" alt="Card image cap">
@@ -112,17 +122,41 @@ export default {
   name: 'home',
   data () {
  return {
-        Users: [],
+				Users: [],
+				events: [],
         uid: "",
-        search: ""
+        search: '',
       };
   },
   methods: {
    
 		  toggleModal() {
         this.modalShown = !this.modalShown;
-    }
-  },
+		},
+		range : function (start, end) {
+      return Array(end - start + 1).fill().map((_, idx) => start + idx)
+   }
+	},
+	computed: {
+      filteredUsers: function() {
+       
+        return this.events.filter(user => {
+          
+
+     
+          return (
+                    user.event.match(this.search) 
+                  );
+
+        
+        
+          
+        
+        
+         
+        });
+      }
+    },
   mounted() {
 		 if (localStorage.getItem('reloaded')) {
         // The page was just reloaded. Clear the value from local storage
@@ -151,30 +185,24 @@ export default {
  localStorage.setItem('nameTH', this.Users.nameTH);
 				 localStorage.setItem('nameEng', this.Users.nameEng);
 				 }
-
-				 
-
-				
-
-			
-
 			})
 			
       .catch((error) => {
         console.log(error)
 			})
 
-		
-			
-				
+			axios
+        .get("http://localhost:8082/event")
+        .then(response => {
+          
+          this.events = response.data;
+          console.log(this.events);
+        })
+        .catch(error => {
+          console.log(error);
+        });
 
-			// if (this.User.nameTH != null){
-										
-			// }else{
 
-			// 	// window.location.href = "http://localhost:8080/#/directory"
-
-			// }
 			
   }
 

@@ -193,7 +193,11 @@ console.log("ตรวจพบ user ไม่มี department สลับไ�
     }
    localStorage.setItem('Header', 'true');
 
-     if(localStorage.getItem('nameTH') == null){
+if(localStorage.getItem('Token') == null ){
+  window.location.href = "http://localhost:8080/#/"
+}
+
+     else if(localStorage.getItem('nameTH') == null) {
     window.location.href = "http://localhost:8080/#/updateuser/" + localStorage.getItem('userID')
     }
    

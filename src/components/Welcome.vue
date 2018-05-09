@@ -10,7 +10,7 @@
 
        <h1 id="welcome-brand"> Grouppe </h1>
 
-       <h4 id="welcome-quote"> Grouppe คือสารานุกรมชาว EGMU ที่คุณจะไม่พลาดทุกการติดต่อ กับเพื่อนๆ พี่ๆ น้องๆ ชาววิศวะมหิดล </h4>
+       <h4 id="welcome-quote" > Grouppe คือสารานุกรมชาว EGMU ที่คุณจะไม่พลาดทุกการติดต่อ กับเพื่อนๆ พี่ๆ น้องๆ ชาววิศวะมหิดล </h4>
 
     <button id="login-modal"class="btn btn-default" data-toggle="modal" data-target=".login-modal" >login</button>
     <button id="register-modal"class="btn btn-primary" data-toggle="modal" data-target=".register-modal" >register</button>
@@ -168,6 +168,8 @@ export default {
         location.reload();
     }
     localStorage.removeItem("Header");
+
+    
     
   }
 }
@@ -211,12 +213,15 @@ export default {
     width: 300px; */
 
     
-  position: fixed;
-  top: 61%;
-  left: 50%;
+  /* position: fixed; */
+  /* top: 75%;
+  left: 50%; */
   /* bring your own prefixes */
-  transform: translate(-50%, -50%);
+
+  margin-top: 30%;
+  /* transform: translate(-50%, -50%); */
   color: white;
+  /* display: inline; */
 
 
   }
