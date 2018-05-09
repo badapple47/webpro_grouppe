@@ -28,9 +28,9 @@
   
   
           <div class="input-group" >
-            <input type="text" class="form-control" placeholder="Search for..." v-model="search">
+            <input type="text" class="form-control" placeholder="Search for..." v-model="search" @click="sortMode(1)">
             <span class="input-group-btn">
-            <button class="btn btn-default" type="button">Go!</button>
+            <button class="btn btn-default" type="button" >Go!</button>
             </span>
           </div>
 
@@ -51,7 +51,7 @@
     <option value="ชีวะการแพทย์">ชีวะการแพทย์</option>
   </ul> -->
 
-  <select v-model="search" >
+  <select v-model="search2" @click="sortMode(2)">
    <option disabled value="">ค้นหาตามภาค</option>   
     <option value="เครื่องกล">เครื่องกล</option>
     <option value="เคมี">เคมี</option>
@@ -122,7 +122,9 @@
         Users: [],
         uid: "",
         search: "",
-        sortbyDepartment : ""
+        search2: "",
+        sortbyDepartment : "",
+        searchMode: ''
       };
     },
     methods: {
@@ -130,9 +132,14 @@
         localStorage.removeItem("Token");
         window.location.href = "http://localhost:8080/#/";
       },
-      sort(value){
-        console.log('hi')
-        console.log(this.sortbyDepartment)
+      sortMode(mode){
+        if(mode == 1){
+        this.searchMode = "searchbox"
+        }else if (mode == 2){
+        this.searchMode = "department"
+        }
+        
+        console.log(this.searchMode)
       }
     },
     computed: {
@@ -150,10 +157,23 @@ console.log("ตรวจพบ user ไม่มี department สลับไ�
 
         }else{
 
-           return (
-            
-            user.department.match(this.search) 
-          );
+        if(this.searchMode == "searchbox"){
+          return (
+                    user.nameTH.match(this.search) 
+                  );
+        }else if(this.searchMode == "department"){
+          return (
+                    user.department.match(this.search2) 
+                  );
+
+        }else{
+
+          return (
+                    user.department.match(this.search) 
+                  );
+
+        }
+        
           
         }
         
