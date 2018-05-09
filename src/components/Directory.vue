@@ -16,7 +16,7 @@
   
   
   
-          <h3 id="alumnia-detail">สมาชิกทั้งหมด 0 คน</h3>
+          <h3 id="alumnia-detail">สมาชิกทั้งหมด  {{numofalumnia}} คน</h3>
           <h3 id="alumnia-detail" style="color:#ffcc00; margin-top:0%;">อัพเดทล่าสุด 5/5/2018</h3>
   
   
@@ -76,10 +76,8 @@
             <p>{{users.facebook}}</p>
   
           </div>
-          <router-link :to="{ path: 'updateuser/' + users._id}" class="btn btn-xs btn-warning" tag="button" type="button">
-            <span class="glyphicon glyphicon-pencil"></span>
-          </router-link>
-          <button class="btn btn-xs btn-danger" data-toggle="modal" data-target=".bd-example-modal-sm" ><span class="glyphicon glyphicon-trash"></span></button>
+        
+          <button class="btn btn-xs btn-primary" data-toggle="modal" data-target=".bd-example-modal-sm" ><span >Detail</span></button>
         </div>
       </div>
   
@@ -98,12 +96,13 @@
 <script>
   import axios from "axios";
   export default {
-    name: "users",
+    
     data() {
       return {
         Users: [],
         uid: "",
-        search: ""
+        search: "",
+        numofalumnia: 0
       };
     },
     methods: {
@@ -114,9 +113,12 @@
     },
     computed: {
       filteredUsers: function() {
+        // 
         return this.Users.filter(user => {
+          console.log(user)
           return (
-            user.firstName.match(this.search) || user.lastName.match(this.search)
+            
+            user.password.match(this.search) 
           );
         });
       }
