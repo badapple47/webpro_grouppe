@@ -172,12 +172,13 @@ export default {
   methods: {
     updateToAPI () {
 
-       if(this.User.nameTH == undefined||''   || this.User.nameEng ==undefined||'' || this.User.studentID == undefined||''){
-        console.log("nameTH = NULL")
+
+       if(this.User.nameTH == ""   || this.User.nameEng == "" || this.User.studentID == "" || this.User.nameTH == undefined || this.User.nameEng == undefined || this.User.studentID == undefined){
         this.warning2 = true ;
       }else{
 
         console.log(this.User.nameTH)
+
 
              console.log("CLICK")
       console.log(this.$route.params.userId)
@@ -196,6 +197,7 @@ export default {
       axios.post('http://localhost:8082/updatealumnia/' + this.$route.params.userId, newUser)
         .then((response) => {
           console.log(response)
+          window.location.href = "http://localhost:8080/#/home"
 
         })
         .catch((error) => {
