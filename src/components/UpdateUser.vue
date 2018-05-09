@@ -1,15 +1,16 @@
 <template>
-
-  <div class="container">
+ 
+  <div class="container"  >
     <img class="text-left" id="bg" v-bind:src='"../../static/img/wallpaper.png"' height="600" width="1200" />
     <form>
-      <div class="col-md-6 col-md-offset-3">
-      <div class="well" >
+      <div class="col-md-6 col-md-offset-3" >
+      <div class="well" style="background-color:white;" >
         <h4>Update User</h4>
-        <div class="row">
+        <div class="row" >
 
 
-      <img class="img-responsive center-block" id="profile-img"  v-bind:src= User.imageUrl />
+      <img class="img-responsive center-block" id="profile-img" v-if="User.imageUrl != undefined" v-bind:src= User.imageUrl />
+      <img class="img-responsive center-block" id="profile-img"  v-if="User.imageUrl == undefined"  v-bind:src= imageDefault />
   
 
 
@@ -42,22 +43,34 @@
           <label class="pull-left">Image Url </label>
           <input type="text" class="form-control" placeholder="Image Url" v-model="User.imageUrl">
         </div> -->
+<div class="form-group" v-if="warning1==true">
 
+  <div class="panel panel-waning">
+  <div class="panel-heading">
+    <h3 class="panel-title">สำคัญ</h3>
+  </div>
+  <div class="panel-body">
+    เข้าสู่ระบบครั้งแรก โปรดทำการกรอกข้อมูลที่จำเป็นก่อน
+  </div>
+</div>
+
+
+</div>
         <div class="form-group" >
           <label class="pull-left">ชื่อ-นามสกุล *</label>
-          <input type="text" class="form-control" placeholder="ชื่อ-นามสกุล">
+          <input type="text" class="form-control" placeholder="ชื่อ-นามสกุล" v-model="User.nameTH">
         </div>
         <div class="form-group" >
-          <label class="pull-left">Name-Surname</label>
-          <input type="text" class="form-control" placeholder="Name-Surname">
+          <label class="pull-left">Name-Surname *</label>
+          <input type="text" class="form-control" placeholder="Name-Surname" v-model="User.nameEng">
         </div>
         <div class="form-group" >
           <label class="pull-left">เลขประจำตัวประชาชน<small style="color:grey;"> *ไม่เปิดเผยต่อสาธารณะ</small></label>
-          <input type="text" class="form-control" placeholder="เลขประจำตัวประชาชน" >
+          <input type="text" class="form-control" placeholder="เลขประจำตัวประชาชน" v-model="User.nationalID">
         </div>
         <div class="form-group" >
           <label class="pull-left">ภาค</label>
-          <select name="ภาค" style="width: 100%;">
+          <select name="ภาค" style="width: 100%;" v-model="User.department">
       <option selected disabled>ภาค</option>      
     <option value="เครื่องกล">เครื่องกล</option>
     <option value="saab">เคมี</option>
@@ -72,7 +85,7 @@
         
         <div class="form-group" >
           <label class="pull-left">รหัสนักศึกษา *</label>
-          <input type="text" class="form-control" placeholder="รหัสนักศึกษา">
+          <input type="text" class="form-control" placeholder="รหัสนักศึกษา" v-model="User.studentID">
         </div>
         <div class="form-group">
           <label class="pull-left">Image Url </label>
@@ -88,26 +101,37 @@
         
         <div class="form-group" >
           <label class="pull-left">อีเมลล์</label>
-          <input type="text" class="form-control" placeholder="johnmedapple@gmail.com" >
+          <input type="text" class="form-control" placeholder="johnmedapple@gmail.com" v-model="User.email">
         </div>
         <div class="form-group" >
           <label class="pull-left">เบอร์ติดต่อ</label>
-          <input type="text" class="form-control" placeholder="086XXXXXXX">
+          <input type="text" class="form-control" placeholder="086XXXXXXX" v-model="User.mobileNo">
         </div>
         <div class="form-group" >
           <label class="pull-left">เว็บไซต์</label>
-          <input type="text" class="form-control" placeholder="http://gogole.com" >
+          <input type="text" class="form-control" placeholder="http://applebubee.com" v-model="User.website">
         </div>
+        
+
+
+<div class="panel panel-danger" v-if="warning2==true">
+  <div class="panel-heading">
+    <h3 class="panel-title">ผิดพลาด</h3>
+  </div>
+  <div class="panel-body">
+    กรุณากรอกฟอร์มช่องที่มีเครื่องหมาย * ให้ครบทุกช่อง
+  </div>
+</div>
       
 <br>
 
-         <button  tag="button" type="button" class="btn btn-large btn-block btn-primary center-block" style="width : 50%;" >
+         <button  tag="button" type="button" class="btn btn-large btn-block btn-success center-block" style="width : 50%;" @click="updateToAPI">
        
         Submit
       </button>
 
 <br>
-      <router-link to="/home" tag="button" class="btn btn-large btn-block btn-success center-block" type="button" style="width : 50%;">
+      <router-link v-if="warning1==true" to="/home" tag="button" class="btn btn-large btn-block btn-primary center-block" type="button" style="width : 50%;">
         <span>Back to User Page</span>
       </router-link>
       </div>
@@ -126,54 +150,85 @@ export default {
   name: 'UpdateUser',
   data () {
     return {
+      warning1 : false ,
+      warning2 : false ,
       msg: 'Update User',
       User: {
-        firstName: '',
-        lastName: '',
+        nameTH: '',
+        nameEng: '',
+        nationalID: '',
+        department : '',
+        studentID: '',
+        imageUrl: '',
         email: '',
-        contactId: '',
         mobileNo: '',
-        facebook: '',
-        imageUrl: 'https://www.iphone-droid.net/wp-content/uploads/2013/09/Mamegoma-icon.png'
-      }
+        website: '',
+        
+
+      },
+      imageDefault: 'https://www.iphone-droid.net/wp-content/uploads/2013/09/Mamegoma-icon.png',
     }
   },
   methods: {
     updateToAPI () {
-      console.log("CLICK")
+
+       if(this.User.nameTH == undefined||''   || this.User.nameEng ==undefined||'' || this.User.studentID == undefined||''){
+        console.log("nameTH = NULL")
+        this.warning2 = true ;
+      }else{
+
+        console.log(this.User.nameTH)
+
+             console.log("CLICK")
       console.log(this.$route.params.userId)
         let newUser = {
-       firstName: this.User.firstName,
-        lastName: this.User.lastName,
+       nameTH: this.User.nameTH,
+        nameEng: this.User.nameEng,
+        nationalID: this.User.nationalID,
+        department : this.User.department,
+        studentID : this.User.studentID,
+        imageUrl: this.User.imageUrl,
         email: this.User.email,
-        contactId : this.User.contactId,
-        mobileNo : this.User.mobileNo,
-        facebook: this.User.facebook,
-        imageUrl: this.User.imageUrl
+        mobileNo: this.User.mobileNo,
+        website: this.User.website
       }
       console.log(newUser)
       axios.post('http://localhost:8082/updatealumnia/' + this.$route.params.userId, newUser)
         .then((response) => {
           console.log(response)
-          // window.location.href = "http://localhost:8080/#/home"
+
         })
         .catch((error) => {
           console.log(error)
         })
 
-      // window.location.reload()
+
+
+      }
+
+
+ 
     }
   },
   mounted () {
-    axios.get('http://localhost:8082/updatealumia/' + this.$route.params.userId)
+    axios.get('http://localhost:8082/alumnia/' + this.$route.params.userId)
       .then((response) => {
-        // console.log(response.data)
+console.log(response.data)
         this.User = response.data
+
       })
       .catch((error) => {
         console.log(error)
       })
+      if( localStorage.getItem('nameEng') == undefined || localStorage.getItem('nameEng') == null){
+
+        this.warning = true;
+
+      }
+      
   }
+
+
 }
 </script>
 

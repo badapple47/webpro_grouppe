@@ -119,8 +119,9 @@ window.location.href = "http://localhost:8080/#/"
     }
     axios.get('http://localhost:8082/alumnia')
       .then((response) => {
-        console.log(response.data)
+        
         this.Users = response.data
+        console.log(this.Users)
       })
       .catch((error) => {
         console.log(error)

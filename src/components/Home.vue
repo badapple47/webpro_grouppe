@@ -111,37 +111,14 @@ import axios from 'axios'
 export default {
   name: 'home',
   data () {
-    return {
-			 modalShown: false ,
-      msg: 'EGCO427',
-       User: {
-        username: '',
-        password: '',
-      }
-    }
+ return {
+        Users: [],
+        uid: "",
+        search: ""
+      };
   },
   methods: {
-    addToAPI () {
-      let newUser = {
-        username: this.User.username,
-        password: this.User.password,
-     
-      }
-      console.log(newUser)
-      axios.post('http://localhost:8082/authen', newUser)
-        .then((response) => {
-          console.log(response.data)
-          if(response.data == "Okay!"){
-            console.log("Okay let's go")
-            localStorage.setItem('Token', 'asdasdasdasd');
-           window.location.href = "http://localhost:8080/#/home"
-
-          }
-        })
-        .catch((error) => {
-          console.log(error)
-        })
-		},
+   
 		  toggleModal() {
         this.modalShown = !this.modalShown;
     }
@@ -162,15 +139,42 @@ export default {
     if(localStorage.getItem('Token') == null){
       window.location.href = "http://localhost:8080/#/"
     }
-    axios.get('http://localhost:8082/alumnia')
+    axios.get('http://localhost:8082/alumnia/' + localStorage.getItem('userID'))
       .then((response) => {
-				console.log(response.data)
+				console.log(response.data.nameTH);
+				 this.Users = response.data;
+
+				 		if(this.Users.nameTH == undefined){
+					 window.location.href = "http://localhost:8080/#/updateuser/" + this.Users._id
+					 location.reload();
+				 }else{
+ localStorage.setItem('nameTH', this.Users.nameTH);
+				 localStorage.setItem('nameEng', this.Users.nameEng);
+				 }
+
+				 
+
 				
-        // this.Users = response.data
-      })
+
+			
+
+			})
+			
       .catch((error) => {
         console.log(error)
 			})
+
+		
+			
+				
+
+			// if (this.User.nameTH != null){
+										
+			// }else{
+
+			// 	// window.location.href = "http://localhost:8080/#/directory"
+
+			// }
 			
   }
 
