@@ -66,7 +66,6 @@ export default {
 
 <style>
 .event-container{
-  /* margin: 0px 150px 0px 150px; */
   width: 60%;
 }
 .news-detail{
@@ -78,7 +77,7 @@ export default {
 .news-img{
   width: 100%;
   height: 400px;
-  margin: 20px;
+  padding: 20px;
   object-fit: scale-down;
 }
 .detail-body{

@@ -1,6 +1,6 @@
 <template>
   <div class="news-detail">
-    <div class="container">
+    <div class="container news-container">
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="/#/home">Home</a></li>
@@ -8,6 +8,7 @@
         </ol>
       </nav>
       <H1>News1</H1>
+      <hr>
       <span>
         <img class="news-img" src="https://www.petful.com/wp-content/uploads/2014/10/Samoyed.jpg" alt="Card image cap">
       </span>
@@ -59,6 +60,9 @@ export default {
 </script>
 
 <style>
+.news-container{
+  width: 60%;
+}
 .news-detail{
   text-align: left;
 }
@@ -68,7 +72,7 @@ export default {
 .news-img{
   width: 100%;
   height: 400px;
-  margin: 20px;
+  padding: 20px;
   object-fit: scale-down;
 }
 .detail-body{
