@@ -145,6 +145,7 @@ export default {
             console.log("authen success")
             localStorage.setItem('Token', 'asdasdasdasd');
             localStorage.setItem('userID', response.data.userID);
+            localStorage.setItem('username', this.User.username);
            window.location.href = "http://localhost:8080/#/home"
 
           }

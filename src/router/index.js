@@ -4,7 +4,6 @@ import Router from 'vue-router'
 import UserList from '@/components/UserList'
 import AddUser from '@/components/AddUser'
 import UpdateUser from '@/components/UpdateUser'
-import Login from '@/components/Login'
 import Welcome from '@/components/Welcome'
 import Home from '@/components/Home'
 import Directory from '@/components/Directory'
@@ -27,6 +26,7 @@ export default new Router({
       component: AddUser
     },
     {
+      // path: '/updateuser/',
       path: '/updateuser/:userId',
       name: 'UpdateUser',
       component: UpdateUser
@@ -36,11 +36,7 @@ export default new Router({
       name: 'Welcome',
       component: Welcome
     },
-    {
-      path: '/login',
-      name: 'Login',
-      component: Login
-    },
+
     {
       path: '/directory',
       name: 'Directory',
