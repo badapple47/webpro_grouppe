@@ -16,7 +16,7 @@
   
   
   
-          <h3 id="alumnia-detail">สมาชิกทั้งหมด  {{numofalumnia}} คน</h3>
+          <h3 id="alumnia-detail">สมาชิกทั้งหมด  {{Users.length}} คน</h3>
           <h3 id="alumnia-detail" style="color:#ffcc00; margin-top:0%;">อัพเดทล่าสุด 5/5/2018</h3>
   
   
@@ -36,7 +36,7 @@
 
   </div>
   <div class="col-lg-3">
-          <div class="btn-group" style="margin-left:-60%;">
+          <div class="btn-group" style="margin-left:-40%;">
   <!-- <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     รุ่น <span class="caret"></span>
   </button>
@@ -52,7 +52,7 @@
   </ul> -->
 
   <select v-model="search" >
-   <option selected disabled>ภาค</option>      
+   <option disabled value="">ค้นหาตามภาค</option>   
     <option value="เครื่องกล">เครื่องกล</option>
     <option value="เคมี">เคมี</option>
     <option value="โยธา">โยธา</option>
@@ -84,12 +84,15 @@
   
       <div class="col-sm-6 col-md-3" v-for="users in filteredUsers" v-bind:key="users._id">
         <div class="thumbnail">
-          <img id="profile-img" v-bind:src= users.imageUrl />
+          <!-- <img id="profile-img" v-bind:src= users.imageUrl /> -->
+          <img class="img-responsive center-block" id="profile-img" v-if="users.imageURL != undefined" v-bind:src= users.imageURL />
+      <img class="img-responsive center-block" id="profile-img"  v-else  v-bind:src= imageDefault />
           <div class="caption">
-            <h3>{{users.firstName}} {{users.lastName}}</h3>
-            <p>{{users.mobileNo}}</p>
-            <p>{{users.email}}</p>
-            <p>{{users.facebook}}</p>
+            <h3>{{users.nameTH}} </h3>
+            <p>{{users.nameEng}}</p>
+            <p>{{users.department}}</p>
+            <p>{{users.studentID}}</p>
+        
   
           </div>
         
@@ -115,10 +118,10 @@
     
     data() {
       return {
+        imageDefault: 'https://www.iphone-droid.net/wp-content/uploads/2013/09/Mamegoma-icon.png',
         Users: [],
         uid: "",
         search: "",
-        numofalumnia: 0 ,
         sortbyDepartment : ""
       };
     },
@@ -134,13 +137,27 @@
     },
     computed: {
       filteredUsers: function() {
-        // 
+       
         return this.Users.filter(user => {
-          console.log(user)
-          return (
+          
+
+           if( user.department == undefined){
+console.log("ตรวจพบ user ไม่มี department สลับไปใช้ username มาโชว์แทน")
+              return (
+            
+            user.username.match(this.search) 
+          );
+
+        }else{
+
+           return (
             
             user.department.match(this.search) 
           );
+          
+        }
+        
+         
         });
       }
     },
