@@ -15,6 +15,16 @@
 
 
 </div>
+
+
+<div class="panel panel-warning" v-if="warning1==true">
+  <div class="panel-heading">
+    <h3 class="panel-title">สำคัญ</h3>
+  </div>
+  <div class="panel-body">
+    โปรดกรอกฟอร์มที่มี * ให้ครบทุกช่องในกรณีใช้งานครั้งแรก
+  </div>
+</div>
         <!-- <div class="form-group" >
           <label class="pull-left">Contact ID </label>
           <input type="text" class="form-control" placeholder="Contact ID" v-model="User.contactId">
@@ -43,19 +53,7 @@
           <label class="pull-left">Image Url </label>
           <input type="text" class="form-control" placeholder="Image Url" v-model="User.imageUrl">
         </div> -->
-<div class="form-group" v-if="warning1==true">
 
-  <div class="panel panel-waning">
-  <div class="panel-heading">
-    <h3 class="panel-title">สำคัญ</h3>
-  </div>
-  <div class="panel-body">
-    เข้าสู่ระบบครั้งแรก โปรดทำการกรอกข้อมูลที่จำเป็นก่อน
-  </div>
-</div>
-
-
-</div>
         <div class="form-group" >
           <label class="pull-left">ชื่อ-นามสกุล *</label>
           <input type="text" class="form-control" placeholder="ชื่อ-นามสกุล" v-model="User.nameTH">
@@ -69,16 +67,16 @@
           <input type="text" class="form-control" placeholder="เลขประจำตัวประชาชน" v-model="User.nationalID">
         </div>
         <div class="form-group" >
-          <label class="pull-left">ภาค</label>
+          <label class="pull-left">ภาค *</label>
           <select name="ภาค" style="width: 100%;" v-model="User.department">
       <option selected disabled>ภาค</option>      
     <option value="เครื่องกล">เครื่องกล</option>
-    <option value="saab">เคมี</option>
-    <option value="fiat">โยธา</option>
-    <option value="audi">คอม</option>
-    <option value="audi">อุตสาหะการ</option>
-    <option value="audi">ไฟฟ้า</option>
-    <option value="audi">ชีวะการแพทย์</option>
+    <option value="เคมี">เคมี</option>
+    <option value="โยธา">โยธา</option>
+    <option value="คอม">คอม</option>
+    <option value="อุตสาหะการ">อุตสาหะการ</option>
+    <option value="ไฟฟ้า">ไฟฟ้า</option>
+    <option value="ชีวะการแพทย์">ชีวะการแพทย์</option>
   </select>
         </div>
 
@@ -173,7 +171,7 @@ export default {
     updateToAPI () {
 
 
-       if(this.User.nameTH == ""   || this.User.nameEng == "" || this.User.studentID == "" || this.User.nameTH == undefined || this.User.nameEng == undefined || this.User.studentID == undefined){
+       if(this.User.nameTH == ""   || this.User.nameEng == "" || this.User.studentID == "" ||  this.User.department == "" || this.User.nameTH == undefined || this.User.nameEng == undefined || this.User.studentID == undefined || this.User.department == undefined ){
         this.warning2 = true ;
       }else{
 
@@ -224,7 +222,7 @@ console.log(response.data)
       })
       if( localStorage.getItem('nameEng') == undefined || localStorage.getItem('nameEng') == null){
 
-        this.warning = true;
+        this.warning1 = true;
 
       }
       

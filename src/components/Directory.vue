@@ -28,7 +28,7 @@
   
   
           <div class="input-group" >
-            <input type="text" class="form-control" placeholder="Search for...">
+            <input type="text" class="form-control" placeholder="Search for..." v-model="search">
             <span class="input-group-btn">
             <button class="btn btn-default" type="button">Go!</button>
             </span>
@@ -37,21 +37,37 @@
   </div>
   <div class="col-lg-3">
           <div class="btn-group" style="margin-left:-60%;">
-  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <!-- <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     รุ่น <span class="caret"></span>
   </button>
-  <ul class="dropdown-menu">
-    <li><a href="#">เครื่องกล</a></li>
-    <li><a href="#">เคมี</a></li>
-    <li><a href="#">โยธา</a></li>
-    <li><a href="#">คอม</a></li>
-    <li><a href="#">อุตสาหการ</a></li>
-    <li><a href="#">ไฟฟ้า</a></li>
-    <li><a href="#">ชีวะการแพทย์</a></li>
-    <li role="separator" class="divider"></li>
-    <li><a href="#">อาจารย์ & การศึกษา</a></li>
-  </ul>
+  <ul class="dropdown-menu" v-bind="sortbyDepartment" @click="sort">
+       <option selected disabled>ภาค</option>      
+    <option value="เครื่องกล">เครื่องกล</option>
+    <option value="เคมี">เคมี</option>
+    <option value="โยธา">โยธา</option>
+    <option value="คอม">คอม</option>
+    <option value="อุตสาหะการ">อุตสาหะการ</option>
+    <option value="ไฟฟ้า">ไฟฟ้า</option>
+    <option value="ชีวะการแพทย์">ชีวะการแพทย์</option>
+  </ul> -->
+
+  <select v-model="search" >
+   <option selected disabled>ภาค</option>      
+    <option value="เครื่องกล">เครื่องกล</option>
+    <option value="เคมี">เคมี</option>
+    <option value="โยธา">โยธา</option>
+    <option value="คอม">คอม</option>
+    <option value="อุตสาหะการ">อุตสาหะการ</option>
+    <option value="ไฟฟ้า">ไฟฟ้า</option>
+    <option value="ชีวะการแพทย์">ชีวะการแพทย์</option>
+</select>
+
 </div>
+
+
+
+
+
   </div> 
           
   
@@ -102,13 +118,18 @@
         Users: [],
         uid: "",
         search: "",
-        numofalumnia: 0
+        numofalumnia: 0 ,
+        sortbyDepartment : ""
       };
     },
     methods: {
       logout() {
         localStorage.removeItem("Token");
         window.location.href = "http://localhost:8080/#/";
+      },
+      sort(value){
+        console.log('hi')
+        console.log(this.sortbyDepartment)
       }
     },
     computed: {
@@ -118,7 +139,7 @@
           console.log(user)
           return (
             
-            user.password.match(this.search) 
+            user.department.match(this.search) 
           );
         });
       }
@@ -134,6 +155,10 @@
         location.reload();
     }
    localStorage.setItem('Header', 'true');
+
+     if(localStorage.getItem('nameTH') == null){
+    window.location.href = "http://localhost:8080/#/updateuser/" + localStorage.getItem('userID')
+    }
    
       axios
         .get("http://localhost:8082/alumnia")
