@@ -155,17 +155,7 @@ export default {
     },
     checkIfUserAlreadyJoinEvent(){
 
-      // if(this.Event.userId[0] == this.userID){
-      //   // this.userAlreadyJoinEvent = true
-      //   console.log('ds')
-      //   // console.log(userAlreadyJoinEvent)
-      // }else{
-      //   console.log(this.Event.userId[0])
-      // }
-
-<<<<<<< HEAD
-      
-      let userID = this.Event.userId
+  let userID = this.Event.userId
       userID.forEach(element => {
         if (element == this.userID) {
 
@@ -173,16 +163,6 @@ export default {
 
         }else{
           this.userAlreadyJoinEvent = false
-=======
-  //by inw ball
-      let userID = this.Event.userId
-      userID.forEach(element => {
-        if (element == this.userID) {
-          this.userAlreadyJoinEvent = true
-          console.log(this.userAlreadyJoinEvent)
-        }else{
-            this.userAlreadyJoinEvent = false
->>>>>>> 179919d8b92bf370753f3d295a089dd76a6518a2
         }
         
       });
