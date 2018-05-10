@@ -4,7 +4,7 @@
 
 
       <div class="jumbotron" >
-  <h1>Hello, world!</h1>
+  <h1>{{Event.event}}</h1>
   <p>...</p>
   <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
 </div>
@@ -23,6 +23,8 @@
                       <p class="paragraph"> สำหรับภาพถ่ายที่ถูกรวบรวมเอาไว้นี้ เป็นภาพถ่ายในอิริยาบทต่าง ๆ ของน้องหมาสายพันธุ์ซามอยด์ ที่แสดงให้เห็นถึงความสดใส ขี้เล่น น่ารัก เป็นมิตร มีลักษณะรูปร่างคล้ายหมีขาวตัวโต จึงไม่แปลกที่น้องหมาพันธุ์นี้จะครองใจและเป็นที่นิยมเลี้ยงไปทั่วโลก</p>
                     </div>
 
+                 
+
 
      
 
@@ -32,44 +34,57 @@
 
 <div class="panel panel-default">
   <div class="panel-body">
-    <div class = "col-md-6">
+
 
       <GmapMap
   :center="{lat:13.794650, lng:100.323465}"
   :zoom="13"
   map-type-id="terrain"
-  style="width: 400px; height: 300px"
+  style="width: 800px; height: 300px;"
 >
 
 </GmapMap>
       
-    </div>
-
-     <div class = "col-md-6">
-         <router-link :to="{ path: '/newsdetail'}" class="btn btn-outline-secondary read-more-btn" tag="button" type="button">
-										<span>อ่านต่อ</span>
-									</router-link>
-    </div>
-
   
 
   </div>
 </div>
 
-      
-									<!-- <button type="button" href="/newsdetail" class="btn btn-outline-secondary read-more-btn">อ่านต่อ</button> -->
-								
-                  
 
-      
 
+<div class="panel panel-default">
+  <div class="panel-body">
+
+ <button class="btn btn-outline-secondary read-more-btn" tag="button" type="button" data-toggle="modal" data-target=".bd-example-modal-sm">
+										<span>สมัคร</span>
+ </button>    
       
   
 
+  </div>
+</div>
+
+
       
-
-
- 
+<div class="modal fade bd-example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title" id="exampleModalLabel" style="text-align: center;">ยืนยัน</h1>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+           <p style="text-align: center;"> คุณต้องการเข้าร่วมงาน {{Event.event}} นี้หรือไม่ </p> </div>
+            <button type="button" class="btn btn-primary center-block" style="border-radius: 15px;" @click="registerEvent">ตกลง</button>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
+            
+          </div>
+        </div>
+      </div>
+    </div>
 
    
     </div>
@@ -83,34 +98,56 @@ export default {
   data () {
     return {
       msg: 'EGCO427',
-       User: {
-        username: '',
-        password: '',
-      }
+      userID :'',
+      Event: []
+
     }
   },
   methods: {
-    addToAPI () {
-      let newUser = {
-        username: this.User.username,
-        password: this.User.password,
+    registerEvent () {
+      let eventInfo = {
+        userID: this.userID,
+        eventID: this.$route.params.userId,
      
       }
-      console.log(newUser)
-      axios.post('http://localhost:8082/authen', newUser)
+      console.log(eventInfo)
+      axios.post('http://localhost:8082/updateMemberInEvent', eventInfo)
         .then((response) => {
           console.log(response.data)
-          if(response.data == "Okay!"){
-            console.log("Okay let's go")
-            localStorage.setItem('Token', 'asdasdasdasd');
-           window.location.href = "http://localhost:8080/#/home"
-
-          }
+          
         })
         .catch((error) => {
           console.log(error)
         })
-    }
+
+         axios.post('http://localhost:8082/updateEventInMember', eventInfo)
+        .then((response) => {
+          console.log(response.data)
+          
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+
+        location.reload();
+    },
+ 
+  },
+  mounted(){
+    this.userID = localStorage.getItem('userID')
+
+
+     axios.get('http://localhost:8082/showEvent/' + this.$route.params.userId)
+      .then((response) => {
+console.log(response.data)
+        this.Event = response.data
+
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+
+
   }
 }
 </script>
