@@ -10,14 +10,9 @@
 						</div>
 					</div>
 				</div>
-<<<<<<< HEAD
-				<div class="lastest-event col-xs-12 col-sm-5 col-md-4 col-lg-4">
-					<router-link to="eventdetail">
-=======
 
 				<div class="lastest-event col-xs-12 col-sm-5 col-md-4 col-lg-4">
 					<router-link to="eventdetail" :to="{ path: 'event/' + events[0]._id}">
->>>>>>> c5c7714eeb7daad9992aa1c8d64b650862422164
 						<div class="card event-card" >
 							<div class="lastest-card-body">
 								<div class="row">
@@ -40,19 +35,12 @@
 						</div>
 					</router-link>
 				</div>
-<<<<<<< HEAD
-				<div class="list-event col-xs-12 col-sm-7 col-md-8 col-lg-8">
-					<div class="row">
-						<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4" v-for="i in 6" >
-							<router-link to="eventdetail">
-=======
 
 				
 				<div class="list-event col-xs-12 col-sm-7 col-md-8 col-lg-8">
 					<div class="row">
 						<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4" v-for="event in filteredUsers" >
 							<router-link to="eventdetail" :to="{ path: 'event/' + event._id}">
->>>>>>> c5c7714eeb7daad9992aa1c8d64b650862422164
 								<div class="card event-card">
 									<span>
 										<img class="card-img-top" v-bind:src= event.image alt="Card image cap">
@@ -68,34 +56,6 @@
 				</div> <!-- list-event -->
 			</div>
 			
-			<div class="news col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<div class="head">
-					<div class="row">
-						<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-							<div class="label-title"><h3>News</h3></div>
-						</div>								
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3" v-for="i in 4" >
-						<div class="card news-card">
-							<span>
-								<img class="news-card-img" src="https://pbs.twimg.com/media/DKnbzS3UMAAra8W.jpg:large" alt="Card image cap">
-            	</span>
-							<div class="card-body news-card-body">
-								<h4 class="">Cute Chimmy</h4>
-								<p class="card-text paragraph cap-cut">The cutest puppy in Mahidol University. He is food lovers.The cutest puppy in Mahidol University. He is food lovers.The cutest puppy in Mahidol University. He is food lovers.</p>
-								<div class="right-item">
-									<router-link :to="{ path: '/newsdetail'}" class="btn btn-outline-secondary read-more-btn" tag="button" type="button">
-										<span>อ่านต่อ</span>
-									</router-link>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div><!-- row -->
-			</div>
-		
     </div><!-- container -->
   </div>
 </template>
@@ -112,7 +72,8 @@ export default {
 				Users: [],
 				events: [],
         uid: "",
-        search: '',
+				search: '',
+				news:[],
       };
   },
   methods: {
@@ -134,11 +95,25 @@ export default {
 	},
 	computed: {
       filteredUsers: function() {
-       
-        return this.events.filter(user => {
+			 
+			 
+        	let event = this.events.slice(1)
+				console.log(event)
+        return event.filter(user => {
+					
           
           return (
                     user.event.match(this.search) 
+                  );
+
+        });
+			},
+			filteredUsers2: function() {
+       
+        return this.news.filter(user => {
+          
+          return (
+                    user.news.match(this.search) 
                   );
 
         });
@@ -189,6 +164,17 @@ export default {
           
           this.events = response.data;
           console.log(this.events);
+        })
+        .catch(error => {
+          console.log(error);
+				});
+				
+					axios
+        .get("http://localhost:8082/news")
+        .then(response => {
+          
+          this.news = response.data;
+          
         })
         .catch(error => {
           console.log(error);
@@ -314,8 +300,6 @@ export default {
 a:hover {
     text-decoration: none;
 }
-<<<<<<< HEAD
-=======
 .cap-cut{
 	display: inline-block;
   display: -webkit-box;
@@ -323,6 +307,5 @@ a:hover {
   -webkit-box-orient: vertical;
 	overflow: hidden;
 }
->>>>>>> c5c7714eeb7daad9992aa1c8d64b650862422164
 </style>
 
