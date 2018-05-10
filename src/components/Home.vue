@@ -79,14 +79,14 @@
 				</div>
 				
 				<div class="row">
-					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4" v-for="i in 3" >
+					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4" v-for="i in news" >
 						<div class="card news-card">
 							<span>
-								<img class="news-card-img" src="https://pbs.twimg.com/media/DKnbzS3UMAAra8W.jpg:large" alt="Card image cap">
+								<img class="news-card-img" v-bind:src= i.image alt="Card image cap">
             	</span>
 							<div class="card-body news-card-body">
-								<h4 class="">Cute Chimmy</h4>
-								<p class="card-text paragraph">The cutest puppy in Mahidol University. He is food lovers.</p>
+								<h4 class="">{{i.news}}</h4>
+								<p class="card-text paragraph">{{i.description}}</p>
 								<div class="right-item">
 									<router-link :to="{ path: '/newsdetail'}" class="btn btn-outline-secondary read-more-btn" tag="button" type="button">
 										<span>อ่านต่อ</span>
@@ -137,7 +137,8 @@ export default {
 				Users: [],
 				events: [],
         uid: "",
-        search: '',
+				search: '',
+				news: []
       };
   },
   methods: {
@@ -227,7 +228,14 @@ export default {
           console.log(error);
         });
 
-
+			axios
+				.get("http://localhost:8082/news")
+				.then(response => {
+					this.news = response.data
+					console.log(this.news)
+				}).catch(error =>{
+					console.log(error)
+				})
 			
   }
 
