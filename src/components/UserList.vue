@@ -85,7 +85,7 @@ export default {
   },
   methods: {
     delUser (userId) {
-      var url = 'http://localhost:8082/users/' + userId
+      var url = 'http://localhost:8082/alumnia/' + userId
       axios.delete(url)
         .then((response) => {
           console.log('Delete UserId: ' + userId)
@@ -113,14 +113,15 @@ window.location.href = "http://localhost:8080/#/"
     }
   },
   mounted () {
-        console.log("Mounnted")
+        console.log("Mounted")
     if(localStorage.getItem('Token') == null){
       window.location.href = "http://localhost:8080/#/"
     }
-    axios.get('http://localhost:8082/users')
+    axios.get('http://localhost:8082/alumnia')
       .then((response) => {
-        console.log(response.data)
+        
         this.Users = response.data
+        console.log(this.Users)
       })
       .catch((error) => {
         console.log(error)

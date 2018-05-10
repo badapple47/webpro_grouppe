@@ -31,9 +31,14 @@
       <ul class="nav navbar-nav navbar-right">
      
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile<span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> {{username}} <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Edit Profile</a></li>
+            <!-- <li><a href="/updateuser {{ }}">Edit Profile</a></li> -->
+            <li>
+            <router-link :to="{ path: 'updateuser/' + userID}" >
+              <span> Edit Profile </span>
+            </router-link>
+            </li>
         
             <li role="separator" class="divider"></li>
             <li><a @click="logout()">Logout</a></li>
@@ -50,15 +55,30 @@
 
 <script>
 export default {
+ data() {
+      return {
+        nameEng: '',
+        userID: '',
+        username: 'New User',
+      };
+    },
 
     methods: {
       logout() {
-        localStorage.removeItem("Token");
-        localStorage.removeItem("Header");
+       localStorage.clear();
         window.location.href = "http://localhost:8080/#/";
    
       }
     },
+
+    mounted(){
+
+       this.nameEng = localStorage.getItem('nameEng')
+       this.userID = localStorage.getItem('userID')
+       this.username = localStorage.getItem('username')
+
+
+    }
 
 }
 </script>

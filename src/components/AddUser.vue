@@ -69,7 +69,7 @@ export default {
         imageUrl: this.User.imageUrl
       }
       console.log(newUser)
-      axios.post('http://localhost:8082/users', newUser)
+      axios.post('http://localhost:8082/register', newUser)
         .then((response) => {
           console.log(response)
           window.location.href = "http://localhost:8080/#/home"

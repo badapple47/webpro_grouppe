@@ -10,7 +10,7 @@
 
        <h1 id="welcome-brand"> Grouppe </h1>
 
-       <h4 id="welcome-quote"> Grouppe คือสารานุกรมชาว EGMU ที่คุณจะไม่พลาดทุกการติดต่อ กับเพื่อนๆ พี่ๆ น้องๆ ชาววิศวะมหิดล </h4>
+       <h4 id="welcome-quote" > Grouppe คือสารานุกรมชาว EGMU ที่คุณจะไม่พลาดทุกการติดต่อ กับเพื่อนๆ พี่ๆ น้องๆ ชาววิศวะมหิดล </h4>
 
     <button id="login-modal"class="btn btn-default" data-toggle="modal" data-target=".login-modal" >login</button>
     <button id="register-modal"class="btn btn-primary" data-toggle="modal" data-target=".register-modal" >register</button>
@@ -36,9 +36,9 @@
       <input type="password" class="form-control"  v-model="User.password">
     </div>
 
-    <router-link data-dismiss="modal" to="/home" class="btn btn-primary" tag="button" type="button">
+    <button data-dismiss="modal" class="btn btn-primary" tag="button" type="button" @click="login">
               <span >login</span>
-            </router-link>
+            </button>
 
   </form>
           </div>
@@ -78,9 +78,9 @@
       <input type="password" class="form-control" id="conpwd" v-model="User.confirmPassword">
     </div>
 
-    <router-link data-dismiss="modal" to="/home" class="btn btn-primary" tag="button" type="button">
+    <button data-dismiss="modal" to="/home"  @click="register" class="btn btn-primary" tag="button" type="button">
               <span >Register</span>
-            </router-link>
+            </button>
 
   </form>
   
@@ -115,6 +115,46 @@ export default {
   },
   methods: {
 
+    register () {
+      let newUser = {
+        username: this.User.username,
+        password: this.User.password,
+      }
+      console.log(newUser)
+      axios.post('http://localhost:8082/register', newUser)
+        .then((response) => {
+          console.log(response)
+          
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
+
+    login(){
+      let newUser = {
+        username: this.User.username,
+        password: this.User.password,
+     
+      }
+      console.log(newUser)
+      axios.post('http://localhost:8082/authen', newUser)
+        .then((response) => {
+          console.log(response.data)
+          if(response.data.note == "success"){
+            console.log("authen success")
+            localStorage.setItem('Token', 'asdasdasdasd');
+            localStorage.setItem('userID', response.data.userID);
+            localStorage.setItem('username', this.User.username);
+           window.location.href = "http://localhost:8080/#/home"
+
+          }
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
+
   },
   mounted(){
 
@@ -128,6 +168,8 @@ export default {
         location.reload();
     }
     localStorage.removeItem("Header");
+
+    
     
   }
 }
@@ -171,12 +213,15 @@ export default {
     width: 300px; */
 
     
-  position: fixed;
-  top: 61%;
-  left: 50%;
+  /* position: fixed; */
+  /* top: 75%;
+  left: 50%; */
   /* bring your own prefixes */
-  transform: translate(-50%, -50%);
+
+  margin-top: 30%;
+  /* transform: translate(-50%, -50%); */
   color: white;
+  /* display: inline; */
 
 
   }
