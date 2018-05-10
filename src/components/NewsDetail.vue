@@ -7,7 +7,7 @@
           <li class="breadcrumb-item active" aria-current="page">{{News.news}}</li>
         </ol>
       </nav>
-      <H1>{{News.news}}</H1>
+      <H1>{{News.news}}: Now the views is => {{News.view}} </H1>
       <span>
         <img class="news-img" v-bind:src= News.image alt="Card image cap">
       </span>
@@ -59,6 +59,16 @@ export default {
   mounted(){
     this.userID = localStorage.getItem('userID')
 
+      axios.get('http://localhost:8082/updateNewsView/' + this.$route.params.userId)
+      .then((response) => {
+// console.log(response.data)
+        // this.News = response.data
+        // console.log(this.Event.userId)
+
+      })
+      .catch((error) => {
+        console.log(error)
+      })
 
      axios.get('http://localhost:8082/showNews/' + this.$route.params.userId)
       .then((response) => {
@@ -70,6 +80,8 @@ export default {
       .catch((error) => {
         console.log(error)
       })
+
+      
 
 
   }
