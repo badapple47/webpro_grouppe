@@ -80,11 +80,23 @@
             </button>
           </div>
            <div class="modal-body">
+             <div class="panel panel-danger" v-if="userAlreadyJoinEvent==true">
+          <div class="panel-heading">
+            <h3 class="panel-title">ผิดพลาด</h3>
+          </div>
+          <div class="panel-body">
+            คุณได้ทำการสมัครเข้าร่วมกิจกรรมนี้ไปแล้ว
+          </div>
+        </div>
+        
             <div class="container-fluid">
            <p style="text-align: center;"> คุณต้องการเข้าร่วมงาน {{Event.event}} นี้หรือไม่ </p> </div>
-            <button type="button"  class="btn btn-success center-block" style="border-radius: 15px; width: 200px;" @click="registerEvent">ตกลง</button>
+            <button type="button"  class="btn btn-success center-block" style="border-radius: 15px; width: 200px;" v-if="userAlreadyJoinEvent==true" disabled @click="registerEvent">ตกลง</button>
+            <button type="button"  class="btn btn-success center-block" style="border-radius: 15px; width: 200px;" v-else  @click="registerEvent">ตกลง</button>
             
           </div>
+
+          
 
 
           <div class="modal-footer">
@@ -143,20 +155,24 @@ export default {
     },
     checkIfUserAlreadyJoinEvent(){
 
-      if(this.Event.userId[0] == this.userID){
-        // this.userAlreadyJoinEvent = true
-        console.log('ds')
-        // console.log(userAlreadyJoinEvent)
-      }else{
-        console.log(this.Event.userId[0])
-      }
+      // if(this.Event.userId[0] == this.userID){
+      //   // this.userAlreadyJoinEvent = true
+      //   console.log('ds')
+      //   // console.log(userAlreadyJoinEvent)
+      // }else{
+      //   console.log(this.Event.userId[0])
+      // }
 
-      
-      let userID = this.Event.userID
+  //by inw ball
+      let userID = this.Event.userId
       userID.forEach(element => {
         if (element == this.userID) {
-
+          this.userAlreadyJoinEvent = true
+          console.log(this.userAlreadyJoinEvent)
+        }else{
+            this.userAlreadyJoinEvent = false
         }
+        
       });
 
     },
