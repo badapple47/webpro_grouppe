@@ -95,7 +95,7 @@
                     <div class="form-group">
                       <h4 class="col-sm-3 big-title">ทักษะ :</h4>
                       <div class="col-sm-9">
-                        <label class="skill" >{{splitModalSkill}}</label>
+                        <label class="skill" v-for="i in splitModalSkill" >{{i}}</label>
                         <!-- <label class="skill">Angular</label>
                         <label class="skill">Database Design</label>
                         <label class="skill">Digital Marketing</label> -->
@@ -129,7 +129,8 @@
         search2: "",
         sortbyDepartment : "",
         searchMode: '',
-        tempData: []
+        tempData: [],
+        splitModalSkill : []
       };
     },
     methods: {
@@ -149,7 +150,7 @@
         
               this.tempData = data
 
-             let splitModalSkill = data.skill.split(',')
+             this.splitModalSkill = data.skill.split(',')
              
             
 
