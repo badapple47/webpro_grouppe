@@ -165,7 +165,7 @@ export default {
 
   //by inw ball
       let userID = this.Event.userId
-      userID.forEach(element => {
+      userIDs.forEach(element => {
         if (element == this.userID) {
           this.userAlreadyJoinEvent = true
           console.log(this.userAlreadyJoinEvent)

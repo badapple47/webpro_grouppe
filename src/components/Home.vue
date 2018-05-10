@@ -94,7 +94,7 @@ export default {
 	 }
 	},
 	computed: {
-      filteredUsers: function() {
+       filteredUsers: function() {
 			 
 			 
         	let event = this.events.slice(1)
