@@ -54,7 +54,10 @@
 
 
 </div>
-  <div class="col-md-10" >
+  <div class="col-md-10">
+<p v-for="(i,index) in userArray" :key="index">
+     {{i}}
+</p>
     </div>
 
      <div class="col-md-2" >
@@ -121,8 +124,11 @@ export default {
       msg: 'EGCO427',
       userID :'',
       Event: [],
-      userAlreadyJoinEvent: false 
-
+      userAlreadyJoinEvent: false,
+      event:[],
+      userArray:[],
+      user:[],
+      userIDArray:[]
     }
   },
   methods: {
@@ -188,6 +194,28 @@ export default {
 // console.log(response.data)
         this.Event = response.data
         // console.log(this.Event.userId)
+
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+
+      axios.get('http://localhost:8082/showEvent/'+this.$route.params.userId)
+          .then((response) => {
+        // console.log(response.data)
+        this.event = response.data
+        console.log("เข้ามาได้แล้วของหน้า Event : " + this.event)
+        var i
+        for(i = 0; i< this.event.userId.length; i++){
+          console.log("this is eventId : "+ this.event.userId[i])
+            axios.get('http://localhost:8082/alumnia/'+ this.event.userId[i])
+                  .then((response) =>{
+                    this.user = response.data
+                    console.log("this is event : "+ this.user.nameTH)
+                    this.userArray.push(this.user.nameTH)
+                    this.userIDArray.push(this.event.userId[i])
+                  })
+        }
 
       })
       .catch((error) => {

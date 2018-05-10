@@ -167,7 +167,8 @@ export default {
 	 console.log("Mounted")
     if(localStorage.getItem('Token') == null){
       window.location.href = "http://localhost:8080/#/"
-    }
+		}
+		
     axios.get('http://localhost:8082/alumnia/' + localStorage.getItem('userID'))
       .then((response) => {
 				console.log(response.data.nameTH);
