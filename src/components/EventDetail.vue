@@ -55,7 +55,13 @@
 
 </div>
   <div class="col-md-10" >
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-for="i in 10">
+      <div class="friendbox">
+        <img class="friend-pic center-block img-circle" v-bind:src= pic alt="Card image cap">
+        <label>Joey Fat</label>
+      </div>
     </div>
+  </div>
 
      <div class="col-md-2" >
        <button class="btn btn-outline-secondary read-more-btn"  @click="checkIfUserAlreadyJoinEvent" tag="button" type="button" data-toggle="modal" data-target=".eventRegister">
@@ -121,8 +127,8 @@ export default {
       msg: 'EGCO427',
       userID :'',
       Event: [],
-      userAlreadyJoinEvent: false 
-
+      userAlreadyJoinEvent: false,
+      pic: 'https://imagineacademy.microsoft.com/content/images/microsoft-img.png'
     }
   },
   methods: {
@@ -244,5 +250,13 @@ export default {
   object-fit: cover;
 
 }
-
+.friend-pic{
+  height: 60px;
+  width: auto;
+  max-width: 60px;
+  object-fit: cover;
+}
+.friendbox{
+  text-align: center;
+}
 </style>
