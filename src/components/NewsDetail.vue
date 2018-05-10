@@ -1,20 +1,63 @@
 <template>
   <div class="news-detail">
-    <div class="container">
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="/#/home">Home</a></li>
-          <li class="breadcrumb-item active" aria-current="page">{{News.news}}</li>
-        </ol>
-      </nav>
-      <H1>{{News.news}}: Now the views is => {{News.view}} </H1>
-      <span>
-        <img class="news-img" v-bind:src= News.image alt="Card image cap">
-      </span>
-      <div class="detail-body">
-        <p class="paragraph"> {{News.description}}</p>
-        <!-- <p class="paragraph"> สำหรับภาพถ่ายที่ถูกรวบรวมเอาไว้นี้ เป็นภาพถ่ายในอิริยาบทต่าง ๆ ของน้องหมาสายพันธุ์ซามอยด์ ที่แสดงให้เห็นถึงความสดใส ขี้เล่น น่ารัก เป็นมิตร มีลักษณะรูปร่างคล้ายหมีขาวตัวโต จึงไม่แปลกที่น้องหมาพันธุ์นี้จะครองใจและเป็นที่นิยมเลี้ยงไปทั่วโลก</p> -->
-      </div>
+    <div class="container event-container" >
+
+
+   
+
+<div class="panel panel-default">
+  <div class="panel-body">
+
+    <div class="page-header">
+  <h2>{{News.event}} <small ></small></h2> <p class="text-right ">จำนวนการเข้าชม : {{News.view}}</p>
+</div>
+
+                <span>
+                     <img class="eventImage" v-bind:src= News.image alt="Card image cap" >
+                    </span>
+                    
+
+
+              
+                      <div class="detail-body" >
+                     <p> {{News.description}}  </p> 
+                    </div>
+
+                 
+
+
+     
+
+									
+  </div>
+  <div class="panel-footer">
+   <p> @{{News.location}} วันที่ {{News.dayStart}} {{News.monthStart}} {{News.yearStart}} </p>
+    </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+
+
+      <GmapMap
+  :center="{lat:13.794650, lng:100.323465}"
+  :zoom="13"
+  map-type-id="terrain"
+  style="width: 800px; height: 300px;"
+>
+
+</GmapMap>
+      
+  
+
+  </div>
+</div>
+
+
+
+
+
+   
     </div>
   </div>
 </template>

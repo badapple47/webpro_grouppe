@@ -7,6 +7,11 @@
 
 <div class="panel panel-default">
   <div class="panel-body">
+
+    <div class="page-header">
+  <h2>{{Event.event}} <small ></small></h2> <p class="text-right ">จำนวนการเข้าชม : {{Event.view}}</p>
+</div>
+
                 <span>
                      <img class="eventImage" v-bind:src= Event.image alt="Card image cap" >
                     </span>
@@ -15,7 +20,7 @@
 
               
                       <div class="detail-body" >
-                     <p> {{Event.description}} : Noew this view is => {{Event.view}} </p> 
+                     <p> {{Event.description}}  </p> 
                     </div>
 
                  
@@ -25,6 +30,9 @@
 
 									
   </div>
+  <div class="panel-footer">
+   <p> @{{Event.location}} วันที่ {{Event.dayStart}} {{Event.monthStart}} {{Event.yearStart}} </p>
+    </div>
 </div>
 
 <div class="panel panel-default">
@@ -50,18 +58,21 @@
 <div class="panel panel-default">
   <div class="panel-body">
     <div class="page-header">
-  <h3>Example page header <small>Subtext for header</small></h3>
+  <h3>เข้าร่วมกิจกรรม <small>กับเพื่อนของคุณ</small></h3>
 
 
 </div>
-  <div class="col-md-10">
-<p v-for="(i,index) in userArray" :key="index">
-     {{i}}
-</p>
+  <div class="col-md-10" >
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-for="i in 10">
+      <div class="friendbox">
+        <img class="friend-pic center-block img-circle" v-bind:src= pic alt="Card image cap">
+        <label>Joey Fat</label>
+      </div>
     </div>
+  </div>
 
      <div class="col-md-2" >
-       <button class="btn btn-outline-secondary read-more-btn"  @click="checkIfUserAlreadyJoinEvent" tag="button" type="button" data-toggle="modal" data-target=".bd-example-modal-sm">
+       <button class="btn btn-outline-secondary read-more-btn"  @click="checkIfUserAlreadyJoinEvent" tag="button" type="button" data-toggle="modal" data-target=".eventRegister">
 										<span>สมัคร</span>
  </button>    
     </div>
@@ -73,7 +84,7 @@
 
 
       
-<div class="modal fade bd-example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade eventRegister" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -92,17 +103,18 @@
           </div>
         </div>
         
-            <div class="container-fluid">
+            <div class="container-fluid"  >
            <p style="text-align: center;"> คุณต้องการเข้าร่วมงาน {{Event.event}} นี้หรือไม่ </p> </div>
             <button type="button"  class="btn btn-success center-block" style="border-radius: 15px; width: 200px;" v-if="userAlreadyJoinEvent==true" disabled @click="registerEvent">ตกลง</button>
             <button type="button"  class="btn btn-success center-block" style="border-radius: 15px; width: 200px;" v-else  @click="registerEvent">ตกลง</button>
             
           </div>
 
-          
+          <qrcode :value="msg" v-if="userAlreadyJoinEvent==true" class="center-block" > </qrcode >
+          <p style="text-align:center;" v-if="userAlreadyJoinEvent==true">* รหัสยืนยันการสมัคร </p>
 
 
-          <div class="modal-footer">
+          <div class="modal-footer" >
             <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
             
           </div>
@@ -117,6 +129,7 @@
 
 <script>
 import axios from 'axios'
+import VueQrcode from '@xkeshi/vue-qrcode'
 export default {
   name: 'home',
   data () {
@@ -128,7 +141,11 @@ export default {
       event:[],
       userArray:[],
       user:[],
-      userIDArray:[]
+      userIDArray:[],
+      userAlreadyJoinEvent: false ,
+      qrCode: '',
+      pic: 'https://www.iphone-droid.net/wp-content/uploads/2013/09/Mamegoma-icon.png'
+
     }
   },
   methods: {
@@ -166,6 +183,8 @@ export default {
         if (element == this.userID) {
 
           this.userAlreadyJoinEvent = true
+          this.qrCode = this.userID + this.$route.params.userId
+          console.log(this.qrCode)
 
         }else{
           this.userAlreadyJoinEvent = false
@@ -223,7 +242,13 @@ export default {
       })
 
 
-  }
+  },
+  	components:{
+
+			'qrcode' : VueQrcode
+
+		},
+  
 }
 </script>
 
@@ -264,6 +289,15 @@ export default {
   height: 200px;
   object-fit: cover;
 
+}
+.friend-pic{
+  height: 60px;
+  width: auto;
+  max-width: 60px;
+  object-fit: cover;
+}
+.friendbox{
+  text-align: center;
 }
 
 </style>
