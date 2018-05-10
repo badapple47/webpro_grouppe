@@ -74,7 +74,7 @@
 								<h4 class="">{{news.news}}</h4>
 								<p class="card-text paragraph cap-cut">{{news.description}}</p>
 								<div class="right-item">
-									<router-link to="NewsDetail" :to="{ path: 'news/' + news._id}">
+									<router-link to="NewsDetail" :to="{ path: 'news/' + news._id}" class="btn btn-outline-secondary read-more-btn" tag="button" type="button">
 										<span>อ่านต่อ</span>
 									</router-link>
 								</div>
