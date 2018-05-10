@@ -7,6 +7,11 @@
 
 <div class="panel panel-default">
   <div class="panel-body">
+
+    <div class="page-header">
+  <h1>{{Event.event}} <small>อ่านไปแล้ว {{Event.view}} ครั้ง</small></h1>
+</div>
+
                 <span>
                      <img class="eventImage" v-bind:src= Event.image alt="Card image cap" >
                     </span>
@@ -15,7 +20,7 @@
 
               
                       <div class="detail-body" >
-                     <p> {{Event.description}} : Noew this view is => {{Event.view}} </p> 
+                     <p> {{Event.description}}  </p> 
                     </div>
 
                  
@@ -50,7 +55,7 @@
 <div class="panel panel-default">
   <div class="panel-body">
     <div class="page-header">
-  <h3>Example page header <small>Subtext for header</small></h3>
+  <h3>เข้าร่วมกิจกรรม <small>กับเพื่อนของคุณ</small></h3>
 
 
 </div>
@@ -89,17 +94,18 @@
           </div>
         </div>
         
-            <div class="container-fluid">
+            <div class="container-fluid"  >
            <p style="text-align: center;"> คุณต้องการเข้าร่วมงาน {{Event.event}} นี้หรือไม่ </p> </div>
             <button type="button"  class="btn btn-success center-block" style="border-radius: 15px; width: 200px;" v-if="userAlreadyJoinEvent==true" disabled @click="registerEvent">ตกลง</button>
             <button type="button"  class="btn btn-success center-block" style="border-radius: 15px; width: 200px;" v-else  @click="registerEvent">ตกลง</button>
             
           </div>
 
-          
+          <qrcode :value="msg" v-if="userAlreadyJoinEvent==true" class="center-block" > </qrcode >
+          <p style="text-align:center;" v-if="userAlreadyJoinEvent==true">* รหัสยืนยันการสมัคร </p>
 
 
-          <div class="modal-footer">
+          <div class="modal-footer" >
             <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
             
           </div>
@@ -114,6 +120,7 @@
 
 <script>
 import axios from 'axios'
+import VueQrcode from '@xkeshi/vue-qrcode'
 export default {
   name: 'home',
   data () {
@@ -121,7 +128,8 @@ export default {
       msg: 'EGCO427',
       userID :'',
       Event: [],
-      userAlreadyJoinEvent: false 
+      userAlreadyJoinEvent: false ,
+      qrCode: ''
 
     }
   },
@@ -160,6 +168,8 @@ export default {
         if (element == this.userID) {
 
           this.userAlreadyJoinEvent = true
+          this.qrCode = this.userID + this.$route.params.userId
+          console.log(this.qrCode)
 
         }else{
           this.userAlreadyJoinEvent = false
@@ -195,7 +205,13 @@ export default {
       })
 
 
-  }
+  },
+  	components:{
+
+			'qrcode' : VueQrcode
+
+		},
+  
 }
 </script>
 

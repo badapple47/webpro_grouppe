@@ -42,12 +42,7 @@
         <li><a href="#/directory">Directory</a></li>
       
       </ul>
-      <form class="navbar-form navbar-left">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
+     
       <ul class="nav navbar-nav navbar-right">
         <li><a data-toggle="modal" data-target=".modal-myEvent">Event</a></li>
         <li class="dropdown">
