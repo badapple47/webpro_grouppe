@@ -65,16 +65,16 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3" v-for="i in 4" >
+					<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3" v-for="news in filteredUsers2" >
 						<div class="card news-card">
 							<span>
-								<img class="news-card-img" src="https://pbs.twimg.com/media/DKnbzS3UMAAra8W.jpg:large" alt="Card image cap">
+								<img class="news-card-img" v-bind:src= news.image alt="Card image cap">
             	</span>
 							<div class="card-body news-card-body">
-								<h4 class="">Cute Chimmy</h4>
-								<p class="card-text paragraph cap-cut">The cutest puppy in Mahidol University. He is food lovers.The cutest puppy in Mahidol University. He is food lovers.The cutest puppy in Mahidol University. He is food lovers.</p>
+								<h4 class="">{{news.news}}</h4>
+								<p class="card-text paragraph cap-cut">{{news.description}}</p>
 								<div class="right-item">
-									<router-link :to="{ path: '/newsdetail'}" class="btn btn-outline-secondary read-more-btn" tag="button" type="button">
+									<router-link to="NewsDetail" :to="{ path: 'news/' + news._id}">
 										<span>อ่านต่อ</span>
 									</router-link>
 								</div>
@@ -100,7 +100,8 @@ export default {
 				Users: [],
 				events: [],
         uid: "",
-        search: '',
+				search: '',
+				news:[],
       };
   },
   methods: {
@@ -127,6 +128,16 @@ export default {
           
           return (
                     user.event.match(this.search) 
+                  );
+
+        });
+			},
+			filteredUsers2: function() {
+       
+        return this.news.filter(user => {
+          
+          return (
+                    user.news.match(this.search) 
                   );
 
         });
@@ -177,6 +188,17 @@ export default {
           
           this.events = response.data;
           console.log(this.events);
+        })
+        .catch(error => {
+          console.log(error);
+				});
+				
+					axios
+        .get("http://localhost:8082/news")
+        .then(response => {
+          
+          this.news = response.data;
+          
         })
         .catch(error => {
           console.log(error);

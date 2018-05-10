@@ -44,7 +44,7 @@ export default new Router({
       component: Directory
     },
     {
-      path: '/newsdetail',
+      path: '/news/:userId',
       name: 'NewsDetail',
       component: NewsDetail
     },
