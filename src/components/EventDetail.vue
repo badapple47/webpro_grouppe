@@ -9,7 +9,7 @@
   <div class="panel-body">
 
     <div class="page-header">
-  <h1>{{Event.event}} <small>อ่านไปแล้ว {{Event.view}} ครั้ง</small></h1>
+  <h2>{{Event.event}} <small ></small></h2> <p class="text-right ">จำนวนการเข้าชม : {{Event.view}}</p>
 </div>
 
                 <span>
@@ -30,6 +30,9 @@
 
 									
   </div>
+  <div class="panel-footer">
+   <p> @{{Event.location}} วันที่ {{Event.dayStart}} {{Event.monthStart}} {{Event.yearStart}} </p>
+    </div>
 </div>
 
 <div class="panel panel-default">
