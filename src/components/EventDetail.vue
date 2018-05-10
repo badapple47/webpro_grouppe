@@ -15,7 +15,7 @@
 
               
                       <div class="detail-body" >
-                     <p> {{Event.description}} </p> 
+                     <p> {{Event.description}} : Noew this view is => {{Event.view}} </p> 
                     </div>
 
                  
@@ -58,7 +58,7 @@
     </div>
 
      <div class="col-md-2" >
-       <button class="btn btn-outline-secondary read-more-btn"  @click="checkIfUserAlreadyJoinEvent" tag="button" type="button" data-toggle="modal" data-target=".bd-example-modal-sm">
+       <button class="btn btn-outline-secondary read-more-btn"  @click="checkIfUserAlreadyJoinEvent" tag="button" type="button" data-toggle="modal" data-target=".eventRegister">
 										<span>สมัคร</span>
  </button>    
     </div>
@@ -70,7 +70,7 @@
 
 
       
-<div class="modal fade bd-example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade eventRegister" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -181,6 +181,15 @@ export default {
   mounted(){
     this.userID = localStorage.getItem('userID')
 
+    axios.get('http://localhost:8082/updateEventView/' + this.$route.params.userId)
+      .then((response) => {
+// console.log(response.data)
+        // console.log(this.Event.userId)
+
+      })
+      .catch((error) => {
+        console.log(error)
+      })
 
      axios.get('http://localhost:8082/showEvent/' + this.$route.params.userId)
       .then((response) => {
