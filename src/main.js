@@ -7,6 +7,8 @@ import * as VueGoogleMaps from 'vue2-google-maps'
 
 Vue.config.productionTip = false
 
+// Vue.component('qrcode', VueQrcode);
+
 /* eslint-disable no-new */
 Vue.use(VueGoogleMaps, {
   load: {

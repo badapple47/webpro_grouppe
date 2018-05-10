@@ -12,6 +12,7 @@ import EventDetail from '@/components/EventDetail'
 
 
 Vue.use(Router)
+// Vue.component('qrcode', VueQrcode);
 
 export default new Router({
   routes: [

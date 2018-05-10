@@ -13,7 +13,8 @@
 					<div class="jumbotron">
 													<h1>Hello, world!</h1>
 													<p>...</p>
-													<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+													<qrcode value="Hello, World!" :options="{ size: 200 }"></qrcode>
+													<p><a class="btn btn-primary btn-lg" href="#" role="button" @click='genpdf'>Learn more</a></p>
 												</div>
 												
 				<router-link to="eventdetail">
@@ -27,10 +28,13 @@
 									</div>
 									<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
 										<h4 class="card-title"><b>{{events[0].event}}</b></h4>
+										
+										<h5 class="card-title"><b>{{events[0].location}}</b></h5>
+
 									</div>
 								</div>
 								<div class="event-detail">
-									<p class="card-text">@Mahidol Salaya</p>
+									<p class="card-text">{{events[0].shortDescription}}</p>
 								</div>
 							</div>
 							<span>
@@ -118,6 +122,9 @@
 
 <script>
 import axios from 'axios'
+import jsPDF from 'jsPDF'
+import VueQrcode from '@xkeshi/vue-qrcode'
+
 export default {
   name: 'home',
   data () {
@@ -135,7 +142,15 @@ export default {
 		},
 		range : function (start, end) {
       return Array(end - start + 1).fill().map((_, idx) => start + idx)
-   }
+	 },
+	 genpdf(){
+
+		 let doc = new jsPDF('p','pt','a4');
+      doc.addHTML(document.body,function() {
+          doc.save('html.pdf');
+      });
+
+	 }
 	},
 	computed: {
       filteredUsers: function() {
@@ -156,7 +171,12 @@ export default {
          
         });
       }
-    },
+		},
+		components:{
+
+			'qrcode' : VueQrcode
+
+		},
   mounted() {
 		 if (localStorage.getItem('reloaded')) {
         // The page was just reloaded. Clear the value from local storage

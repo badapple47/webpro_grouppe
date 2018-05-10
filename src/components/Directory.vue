@@ -114,6 +114,8 @@
 
 <script>
   import axios from "axios";
+  import jsPDF from 'jsPDF'
+
   export default {
     
     data() {
@@ -140,7 +142,8 @@
         }
         
         console.log(this.searchMode)
-      }
+      },
+      
     },
     computed: {
       filteredUsers: function() {
