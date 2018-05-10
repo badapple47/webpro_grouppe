@@ -94,7 +94,11 @@ export default {
 	 }
 	},
 	computed: {
+<<<<<<< HEAD
+       filteredUsers: function() {
+=======
       filteredUsers: function() {
+>>>>>>> 179919d8b92bf370753f3d295a089dd76a6518a2
 			 
 			 
         	let event = this.events.slice(1)
@@ -163,7 +167,7 @@ export default {
         .then(response => {
           
           this.events = response.data;
-          console.log(this.events);
+          // console.log(this.events);
         })
         .catch(error => {
           console.log(error);

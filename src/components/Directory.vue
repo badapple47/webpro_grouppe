@@ -88,17 +88,17 @@
                     <div class="form-group">
                       <h4 class="col-sm-3 big-title">ภาษา :</h4>
                       <div class="col-sm-9">
-                        <h4>Thai : Native</h4>
-                        <h4>English : Beginner</h4>
+                        <h4>{{tempData.language}}</h4>
+                        <!-- <h4>English : Beginner</h4> -->
                       </div>
                     </div>
                     <div class="form-group">
                       <h4 class="col-sm-3 big-title">ทักษะ :</h4>
                       <div class="col-sm-9">
-                        <label class="skill">React</label>
-                        <label class="skill">Angular</label>
+                        <label class="skill" >{{splitModalSkill}}</label>
+                        <!-- <label class="skill">Angular</label>
                         <label class="skill">Database Design</label>
-                        <label class="skill">Digital Marketing</label>
+                        <label class="skill">Digital Marketing</label> -->
                       </div>
                     </div>
                   </form>
@@ -129,7 +129,7 @@
         search2: "",
         sortbyDepartment : "",
         searchMode: '',
-        tempData: {}
+        tempData: []
       };
     },
     methods: {
@@ -146,7 +146,18 @@
         console.log(this.searchMode)
       },
       modalClicked(data) {
-        this.tempData = data
+        
+              this.tempData = data
+
+             let splitModalSkill = data.skill.split(',')
+             
+            
+
+        
+        
+
+        
+        
       }
     },
     computed: {
