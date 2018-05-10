@@ -9,8 +9,13 @@
         <div class="row" >
 
 
+<<<<<<< HEAD
       <img class="img-responsive center-block" id="profile-img" v-if="User.imageURL != undefined" v-bind:src= User.imageURL />
       <img class="img-responsive center-block" id="profile-img"  v-if="User.imageURL == undefined"  v-bind:src= imageDefault />
+=======
+      <!-- <img class="img-responsive center-block" id="profile-img" v-if="User.imageUrl != undefined" v-bind:src= User.imageUrl /> -->
+      <img class="img-responsive center-block" id="profile-img"   v-bind:src= imageDefault />
+>>>>>>> c5c7714eeb7daad9992aa1c8d64b650862422164
   
 
 
@@ -62,6 +67,11 @@
           <label class="pull-left">Name-Surname *</label>
           <input type="text" class="form-control" placeholder="Name-Surname" v-model="User.nameEng">
         </div>
+         <div class="form-group" >
+          <label class="pull-left">วันเกิด</label>
+          
+        <input class="form-control" id="date" name="student_dob" placeholder="MM/DD/YYYY" type="text" v-model="User.birthDate">
+        </div>
         <div class="form-group" >
           <label class="pull-left">เลขประจำตัวประชาชน<small style="color:grey;"> *ไม่เปิดเผยต่อสาธารณะ</small></label>
           <input type="text" class="form-control" placeholder="เลขประจำตัวประชาชน" v-model="User.nationalID">
@@ -91,7 +101,7 @@
         </div> 
 
         
-</br>
+
         <hr style="border-color:white; border-style:solid;">
         </br>
 
@@ -109,19 +119,39 @@
           <label class="pull-left">เว็บไซต์</label>
           <input type="text" class="form-control" placeholder="http://applebubee.com" v-model="User.website">
         </div>
+        <div class="form-group" >
+          <label class="pull-left">ที่ทำงาน</label>
+          <input type="text" class="form-control" placeholder="CDG Thailand" v-model="User.work">
+        </div>
         
 
-
-<div class="panel panel-danger" v-if="warning2==true">
-  <div class="panel-heading">
-    <h3 class="panel-title">ผิดพลาด</h3>
-  </div>
-  <div class="panel-body">
-    กรุณากรอกฟอร์มช่องที่มีเครื่องหมาย * ให้ครบทุกช่อง
-  </div>
-</div>
       
-<br>
+        <hr style="border-color:white; border-style:solid;">
+        </br>
+
+        <h3>ทักษะ</h3>
+        
+        <div class="form-group" >
+          <label class="pull-left">ทักษะ<small style="color:grey;"> เว้นวรรคด้วย ,</small></label>
+          <input type="text" class="form-control" placeholder="HTML,Photoshop" v-model="User.skill">
+        </div>
+        <div class="form-group" >
+          <label class="pull-left">ภาษาที่สามารถสื่อสารได้<small style="color:grey;"> เว้นวรรคด้วย ,</small></label>
+          <input type="text" class="form-control" placeholder="อังกฤษ,ไทย" v-model="User.language">
+        </div>
+  
+
+
+        <div class="panel panel-danger" v-if="warning2==true">
+          <div class="panel-heading">
+            <h3 class="panel-title">ผิดพลาด</h3>
+          </div>
+          <div class="panel-body">
+            กรุณากรอกฟอร์มช่องที่มีเครื่องหมาย * ให้ครบทุกช่อง
+          </div>
+        </div>
+      
+          <br>
 
          <button  tag="button" type="button" class="btn btn-large btn-block btn-success center-block" style="width : 50%;" @click="updateToAPI">
        
@@ -161,6 +191,10 @@ export default {
         email: '',
         mobileNo: '',
         website: '',
+        language: '',
+        skill: '',
+        work:'',
+        birthDate:'',
         
 
       },
@@ -175,13 +209,13 @@ export default {
         this.warning2 = true ;
       }else{
 
-        console.log(this.User.nameTH)
+        console.log(this.User.imageUrl)
 
 
              console.log("CLICK")
       console.log(this.$route.params.userId)
         let newUser = {
-       nameTH: this.User.nameTH,
+        nameTH: this.User.nameTH,
         nameEng: this.User.nameEng,
         nationalID: this.User.nationalID,
         department : this.User.department,
@@ -189,7 +223,11 @@ export default {
         imageURL: this.User.imageURL,
         email: this.User.email,
         mobileNo: this.User.mobileNo,
-        website: this.User.website
+        website: this.User.website,
+         language: this.User.language,
+        skill: this.User.skill,
+        work: this.User.work,
+        birthDate: this.User.birthDate,
       }
       console.log(newUser)
       axios.post('http://localhost:8082/updatealumnia/' + this.$route.params.userId, newUser)

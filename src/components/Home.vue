@@ -2,7 +2,7 @@
 <template>
   <div class="home">
     <div class="containerr">
-			<div class="event">
+			<div class="event col-xs-12 col-sm-12 col-md-12 col-lg-12">
 				<div class="head">
 					<div class="row">
 						<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
@@ -10,40 +10,56 @@
 						</div>
 					</div>
 				</div>
+<<<<<<< HEAD
 				<div class="lastest-event col-xs-12 col-sm-5 col-md-4 col-lg-4">
 					<router-link to="eventdetail">
+=======
+
+				<div class="lastest-event col-xs-12 col-sm-5 col-md-4 col-lg-4">
+					<router-link to="eventdetail" :to="{ path: 'event/' + events[0]._id}">
+>>>>>>> c5c7714eeb7daad9992aa1c8d64b650862422164
 						<div class="card event-card" >
 							<div class="lastest-card-body">
 								<div class="row">
 									<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-										<div class="mounth">ส.ค.</div>
-										<div class="day">26</div>
+										<div class="mounth">{{events[0].monthStart}}</div>
+										<div class="day">{{events[0].dayStart}}</div>
 									</div>
 									<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-										<h4 class="card-title"><b>Bike for มันส์</b></h4>
+										<h4 class="card-title"><b>{{events[0].event}}</b></h4>
+										<h5 class="card-title"><b>{{events[0].location}}</b></h5>
 									</div>
 								</div>
 								<div class="event-detail">
-									<p class="card-text">ปั่นจักรยานสามขารอบมหิดลสิทธาคาร</p>
+									<p class="card-text">{{events[0].shortDescription}}</p>
 								</div>
 							</div>
 							<span>
-								<img class="lastest-card-img" src="https://pbs.twimg.com/media/DKnclXMVoAA_lcf.jpg" alt="Card image cap">
+								<img class="lastest-card-img" v-bind:src= events[0].image alt="Card image cap">
 							</span>
 						</div>
 					</router-link>
 				</div>
+<<<<<<< HEAD
 				<div class="list-event col-xs-12 col-sm-7 col-md-8 col-lg-8">
 					<div class="row">
 						<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4" v-for="i in 6" >
 							<router-link to="eventdetail">
+=======
+
+				
+				<div class="list-event col-xs-12 col-sm-7 col-md-8 col-lg-8">
+					<div class="row">
+						<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4" v-for="event in filteredUsers" >
+							<router-link to="eventdetail" :to="{ path: 'event/' + event._id}">
+>>>>>>> c5c7714eeb7daad9992aa1c8d64b650862422164
 								<div class="card event-card">
 									<span>
-										<img class="card-img-top" src="https://pbs.twimg.com/media/DKnclXMVoAA_lcf.jpg" alt="Card image cap">
+										<img class="card-img-top" v-bind:src= event.image alt="Card image cap">
 									</span>
 									<div class="card-body">
-										<h5 class="card-title"><b>Event1</b></h5>
-										<p class="card-text">26 ส.ค.</p>
+										<h5 class="card-title"><b>{{event.event}}</b></h5>
+										<p class="card-text">{{event.dayStart}} {{events[0].monthStart}}</p>
 									</div>
 								</div>
 							</router-link>
@@ -51,78 +67,88 @@
 					</div>
 				</div> <!-- list-event -->
 			</div>
-			<div class="news">
+			
+			<div class="news col-xs-12 col-sm-12 col-md-12 col-lg-12">
 				<div class="head">
 					<div class="row">
 						<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
 							<div class="label-title"><h3>News</h3></div>
-						</div>
+						</div>								
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" v-for="i in 6" >
+					<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3" v-for="i in 4" >
 						<div class="card news-card">
 							<span>
 								<img class="news-card-img" src="https://pbs.twimg.com/media/DKnbzS3UMAAra8W.jpg:large" alt="Card image cap">
             	</span>
 							<div class="card-body news-card-body">
 								<h4 class="">Cute Chimmy</h4>
-								<p class="card-text paragraph">The cutest puppy in Mahidol University. He is food lovers.</p>
+								<p class="card-text paragraph cap-cut">The cutest puppy in Mahidol University. He is food lovers.The cutest puppy in Mahidol University. He is food lovers.The cutest puppy in Mahidol University. He is food lovers.</p>
 								<div class="right-item">
 									<router-link :to="{ path: '/newsdetail'}" class="btn btn-outline-secondary read-more-btn" tag="button" type="button">
 										<span>อ่านต่อ</span>
 									</router-link>
-									<!-- <button type="button" href="/newsdetail" class="btn btn-outline-secondary read-more-btn">อ่านต่อ</button> -->
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+				</div><!-- row -->
 			</div>
-		</div>
 		
-		    <div class="modal fade bd-example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title" id="exampleModalLabel">Are you sure?</h1>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            Are you sure you want to delete this item? </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <router-link to="/home" class="btn btn-danger" tag="button" type="button">
-              <span @click="delUser(uid)">Delete</span>
-            </router-link>
-          </div>
-        </div>
-      </div>
-    </div>
-		
- <!-- container -->
+    </div><!-- container -->
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import jsPDF from 'jsPDF'
+import VueQrcode from '@xkeshi/vue-qrcode'
+
 export default {
   name: 'home',
   data () {
  return {
-        Users: [],
+				Users: [],
+				events: [],
         uid: "",
-        search: ""
+        search: '',
       };
   },
   methods: {
    
 		  toggleModal() {
         this.modalShown = !this.modalShown;
-    }
-  },
+		},
+		range : function (start, end) {
+      return Array(end - start + 1).fill().map((_, idx) => start + idx)
+	 },
+	 genpdf(){
+
+		 let doc = new jsPDF('p','pt','a4');
+      doc.addHTML(document.body,function() {
+          doc.save('html.pdf');
+      });
+
+	 }
+	},
+	computed: {
+      filteredUsers: function() {
+       
+        return this.events.filter(user => {
+          
+          return (
+                    user.event.match(this.search) 
+                  );
+
+        });
+      }
+		},
+		components:{
+
+			'qrcode' : VueQrcode
+
+		},
   mounted() {
 		 if (localStorage.getItem('reloaded')) {
         // The page was just reloaded. Clear the value from local storage
@@ -151,30 +177,24 @@ export default {
  localStorage.setItem('nameTH', this.Users.nameTH);
 				 localStorage.setItem('nameEng', this.Users.nameEng);
 				 }
-
-				 
-
-				
-
-			
-
 			})
 			
       .catch((error) => {
         console.log(error)
 			})
 
-		
-			
-				
+			axios
+        .get("http://localhost:8082/event")
+        .then(response => {
+          
+          this.events = response.data;
+          console.log(this.events);
+        })
+        .catch(error => {
+          console.log(error);
+        });
 
-			// if (this.User.nameTH != null){
-										
-			// }else{
 
-			// 	// window.location.href = "http://localhost:8080/#/directory"
-
-			// }
 			
   }
 
@@ -294,5 +314,15 @@ export default {
 a:hover {
     text-decoration: none;
 }
+<<<<<<< HEAD
+=======
+.cap-cut{
+	display: inline-block;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+	overflow: hidden;
+}
+>>>>>>> c5c7714eeb7daad9992aa1c8d64b650862422164
 </style>
 

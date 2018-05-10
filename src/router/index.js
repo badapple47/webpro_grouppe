@@ -12,6 +12,7 @@ import EventDetail from '@/components/EventDetail'
 
 
 Vue.use(Router)
+// Vue.component('qrcode', VueQrcode);
 
 export default new Router({
   routes: [
@@ -48,7 +49,7 @@ export default new Router({
       component: NewsDetail
     },
     {
-      path: '/eventdetail',
+      path: '/event/:userId',
       name: 'EventDetail',
       component: EventDetail
     },
