@@ -56,34 +56,6 @@
 				</div> <!-- list-event -->
 			</div>
 			
-			<div class="news col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<div class="head">
-					<div class="row">
-						<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-							<div class="label-title"><h3>News</h3></div>
-						</div>								
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3" v-for="news in filteredUsers2" >
-						<div class="card news-card">
-							<span>
-								<img class="news-card-img" v-bind:src= news.image alt="Card image cap">
-            	</span>
-							<div class="card-body news-card-body">
-								<h4 class="">{{news.news}}</h4>
-								<p class="card-text paragraph cap-cut">{{news.description}}</p>
-								<div class="right-item">
-									<router-link to="NewsDetail" :to="{ path: 'news/' + news._id}">
-										<span>อ่านต่อ</span>
-									</router-link>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div><!-- row -->
-			</div>
-		
     </div><!-- container -->
   </div>
 </template>
@@ -122,7 +94,11 @@ export default {
 	 }
 	},
 	computed: {
+<<<<<<< HEAD
        filteredUsers: function() {
+=======
+      filteredUsers: function() {
+>>>>>>> 179919d8b92bf370753f3d295a089dd76a6518a2
 			 
 			 
         	let event = this.events.slice(1)
