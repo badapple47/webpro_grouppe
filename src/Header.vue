@@ -3,6 +3,26 @@
     
 
 
+<div class="modal fade bd-example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title" id="exampleModalLabel">Are you sure?</h1>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Are you sure you want to delete this item? </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <router-link to="/home" class="btn btn-danger" tag="button" type="button">
+              <span @click="delUser(uid)">Delete</span>
+            </router-link>
+          </div>
+        </div>
+      </div>
+    </div>
 
 <nav class="navbar navbar-default navbar-fixed-top" style="background-color:white;">
   <div class="container-fluid">
@@ -18,7 +38,7 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
+        <li class="active"><a href="#/home">Home <span class="sr-only">(current)</span></a></li>
         <li><a href="#/directory">Directory</a></li>
       
       </ul>
@@ -29,7 +49,7 @@
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
-     
+        <li><a data-toggle="modal" data-target=".bd-example-modal-sm">Event</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> {{username}} <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -39,7 +59,7 @@
               <span> Edit Profile </span>
             </router-link>
             </li>
-        
+
             <li role="separator" class="divider"></li>
             <li><a @click="logout()">Logout</a></li>
           </ul>
@@ -47,6 +67,8 @@
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
+
+  
 </nav>
 
 

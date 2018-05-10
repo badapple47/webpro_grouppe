@@ -55,7 +55,7 @@
 					</div>
 				</div> <!-- list-event -->
 			</div>
-			
+
 			<div class="news col-xs-12 col-sm-12 col-md-12 col-lg-12">
 				<div class="head">
 					<div class="row">
@@ -83,7 +83,7 @@
 					</div>
 				</div><!-- row -->
 			</div>
-		
+			
     </div><!-- container -->
   </div>
 </template>
@@ -122,9 +122,13 @@ export default {
 	 }
 	},
 	computed: {
-      filteredUsers: function() {
-       
-        return this.events.filter(user => {
+       filteredUsers: function() {
+			 
+			 
+        	let event = this.events.slice(1)
+				console.log(event)
+        return event.filter(user => {
+					
           
           return (
                     user.event.match(this.search) 
@@ -187,7 +191,7 @@ export default {
         .then(response => {
           
           this.events = response.data;
-          console.log(this.events);
+          // console.log(this.events);
         })
         .catch(error => {
           console.log(error);
