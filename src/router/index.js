@@ -49,7 +49,7 @@ export default new Router({
       component: NewsDetail
     },
     {
-      path: '/eventdetail',
+      path: '/event/:userId',
       name: 'EventDetail',
       component: EventDetail
     },

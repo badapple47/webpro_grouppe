@@ -17,7 +17,10 @@
 													<p><a class="btn btn-primary btn-lg" href="#" role="button" @click='genpdf'>Learn more</a></p>
 												</div>
 												
-				<router-link to="eventdetail">
+												    <!-- <router-link :to="{ path: 'updateuser/' + users._id}" class="btn btn-xs btn-warning" tag="button" type="button">
+              <span class="glyphicon glyphicon-pencil"></span>
+            </router-link> -->
+				<router-link to="eventdetail" :to="{ path: 'event/' + events[0]._id}">
 					<div class="lastest-event col-xs-12 col-sm-5 col-md-4 col-lg-4">
 						<div class="card event-card" >
 							<div class="lastest-card-body">
@@ -43,14 +46,16 @@
 						</div>
 					</div>
 				</router-link>
-				<router-link to="eventdetail">
+				
 					<div class="list-event col-xs-12 col-sm-7 col-md-8 col-lg-8">
 						<div class="row">
 							<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4" v-for="event in filteredUsers" >
 								<div class="card event-card">
+									<router-link to="eventdetail" :to="{ path: 'event/' + event._id}">
 									<span>
 										<img class="card-img-top" v-bind:src= event.image alt="Card image cap">
 									</span>
+									</router-link>
 									<div class="card-body">
 										<h5 class="card-title"><b>{{event.event}}</b></h5>
 										<p class="card-text">{{event.dayStart}} {{events[0].monthStart}}</p>
@@ -59,7 +64,7 @@
 							</div>
 						</div>
 					</div> <!-- list-event -->
-				</router-link>
+				
 			</div>
 			
 			<div class="news">
