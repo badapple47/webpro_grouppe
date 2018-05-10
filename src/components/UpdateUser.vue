@@ -9,13 +9,8 @@
         <div class="row" >
 
 
-<<<<<<< HEAD
       <img class="img-responsive center-block" id="profile-img" v-if="User.imageURL != undefined" v-bind:src= User.imageURL />
       <img class="img-responsive center-block" id="profile-img"  v-if="User.imageURL == undefined"  v-bind:src= imageDefault />
-=======
-      <!-- <img class="img-responsive center-block" id="profile-img" v-if="User.imageUrl != undefined" v-bind:src= User.imageUrl /> -->
-      <img class="img-responsive center-block" id="profile-img"   v-bind:src= imageDefault />
->>>>>>> c5c7714eeb7daad9992aa1c8d64b650862422164
   
 
 

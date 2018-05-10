@@ -94,11 +94,7 @@ export default {
 	 }
 	},
 	computed: {
-<<<<<<< HEAD
-       filteredUsers: function() {
-=======
       filteredUsers: function() {
->>>>>>> 179919d8b92bf370753f3d295a089dd76a6518a2
 			 
 			 
         	let event = this.events.slice(1)
