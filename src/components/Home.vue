@@ -10,8 +10,8 @@
 						</div>
 					</div>
 				</div>
-				<router-link to="eventdetail">
-					<div class="lastest-event col-xs-12 col-sm-5 col-md-4 col-lg-4">
+				<div class="lastest-event col-xs-12 col-sm-5 col-md-4 col-lg-4">
+					<router-link to="eventdetail">
 						<div class="card event-card" >
 							<div class="lastest-card-body">
 								<div class="row">
@@ -31,12 +31,12 @@
 								<img class="lastest-card-img" src="https://pbs.twimg.com/media/DKnclXMVoAA_lcf.jpg" alt="Card image cap">
 							</span>
 						</div>
-					</div>
-				</router-link>
-				<router-link to="eventdetail">
-					<div class="list-event col-xs-12 col-sm-7 col-md-8 col-lg-8">
-						<div class="row">
-							<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4" v-for="i in 6" >
+					</router-link>
+				</div>
+				<div class="list-event col-xs-12 col-sm-7 col-md-8 col-lg-8">
+					<div class="row">
+						<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4" v-for="i in 6" >
+							<router-link to="eventdetail">
 								<div class="card event-card">
 									<span>
 										<img class="card-img-top" src="https://pbs.twimg.com/media/DKnclXMVoAA_lcf.jpg" alt="Card image cap">
@@ -46,10 +46,10 @@
 										<p class="card-text">26 ส.ค.</p>
 									</div>
 								</div>
-							</div>
+							</router-link>
 						</div>
-					</div> <!-- list-event -->
-				</router-link>
+					</div>
+				</div> <!-- list-event -->
 			</div>
 			<div class="news">
 				<div class="head">
@@ -225,6 +225,7 @@ export default {
 .news-card{
 	padding: 20px;
 	text-align: left;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .event-card{
 	border: 0px;
@@ -264,7 +265,13 @@ export default {
     border-color: #6c757d;
 }
 .read-more-btn{
+	border-width: 2px;
 	border-radius: 50px;
+}
+.read-more-btn:hover{
+	background-color: rgb(36, 32, 32);
+	border-color: rgb(189, 188, 188);
+	color: rgb(189, 188, 188);
 }
 .right-item{
 	text-align: right;
@@ -283,6 +290,9 @@ export default {
 .paragraph{
   text-indent: 25pt;
 	text-align: justify;
+}
+a:hover {
+    text-decoration: none;
 }
 </style>
 

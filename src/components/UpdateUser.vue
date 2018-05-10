@@ -9,8 +9,8 @@
         <div class="row" >
 
 
-      <img class="img-responsive center-block" id="profile-img" v-if="User.imageUrl != undefined" v-bind:src= User.imageUrl />
-      <img class="img-responsive center-block" id="profile-img"  v-if="User.imageUrl == undefined"  v-bind:src= imageDefault />
+      <img class="img-responsive center-block" id="profile-img" v-if="User.imageURL != undefined" v-bind:src= User.imageURL />
+      <img class="img-responsive center-block" id="profile-img"  v-if="User.imageURL == undefined"  v-bind:src= imageDefault />
   
 
 
@@ -51,7 +51,7 @@
         </div>
         <div class="form-group" >
           <label class="pull-left">Image Url </label>
-          <input type="text" class="form-control" placeholder="Image Url" v-model="User.imageUrl">
+          <input type="text" class="form-control" placeholder="Image Url" v-model="User.imageURL">
         </div> -->
 
         <div class="form-group" >
@@ -87,7 +87,7 @@
         </div>
         <div class="form-group">
           <label class="pull-left">Image Url </label>
-          <input type="text" class="form-control" placeholder="Image Url" v-model="User.imageUrl">
+          <input type="text" class="form-control" placeholder="Image Url" v-model="User.imageURL">
         </div> 
 
         
@@ -157,7 +157,7 @@ export default {
         nationalID: '',
         department : '',
         studentID: '',
-        imageUrl: '',
+        imageURL: '',
         email: '',
         mobileNo: '',
         website: '',
@@ -186,7 +186,7 @@ export default {
         nationalID: this.User.nationalID,
         department : this.User.department,
         studentID : this.User.studentID,
-        imageUrl: this.User.imageUrl,
+        imageURL: this.User.imageURL,
         email: this.User.email,
         mobileNo: this.User.mobileNo,
         website: this.User.website
