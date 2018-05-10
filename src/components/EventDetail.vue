@@ -15,7 +15,7 @@
 
               
                       <div class="detail-body" >
-                     <p> {{Event.description}} </p> 
+                     <p> {{Event.description}} : Noew this view is => {{Event.view}} </p> 
                     </div>
 
                  
@@ -165,6 +165,15 @@ export default {
   mounted(){
     this.userID = localStorage.getItem('userID')
 
+    axios.get('http://localhost:8082/updateEventView/' + this.$route.params.userId)
+      .then((response) => {
+// console.log(response.data)
+        // console.log(this.Event.userId)
+
+      })
+      .catch((error) => {
+        console.log(error)
+      })
 
      axios.get('http://localhost:8082/showEvent/' + this.$route.params.userId)
       .then((response) => {
