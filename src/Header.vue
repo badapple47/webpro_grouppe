@@ -7,18 +7,16 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title" id="exampleModalLabel">Are you sure?</h1>
+            <h1 class="modal-title" id="exampleModalLabel">กิจกรรมทั้งหมดที่คุณได้สมัครไว้</h1>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">
-            Are you sure you want to delete this item? </div>
+          <div class="modal-body" >
+              <p v-for="(i,index) in eventArray" :key="index" @click="toEventPage(index)">{{i}}</p></div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <router-link to="/home" class="btn btn-danger" tag="button" type="button">
-              <span @click="delUser(uid)">Delete</span>
-            </router-link>
+            
           </div>
         </div>
       </div>
@@ -71,12 +69,19 @@
 </template>
 
 <script>
+
+import axios from 'axios'
+
 export default {
  data() {
       return {
         nameEng: '',
         userID: '',
         username: 'New User',
+        user:[],
+        eventArray:[],
+        event:[],
+        eventIDArray:[]
       };
     },
 
@@ -85,14 +90,58 @@ export default {
        localStorage.clear();
         window.location.href = "http://localhost:8080/#/";
    
+      },
+      toEventPage(num) {
+        var thisfunc = this
+        thisfunc.$router.push({ path: '/event/'+ this.user.eventId[num]})
       }
     },
+	computed: {
+       filteredUsers: function() {
+			 
+			 
+        	let event = this.eventArray
+				console.log(event)
+        return event.filter(user => {
+					
+          
+          return (
+                    user.event.match(this.search) 
+                  );
+
+        });
+      }
+      
+  },
 
     mounted(){
-
+      var i
        this.nameEng = localStorage.getItem('nameEng')
        this.userID = localStorage.getItem('userID')
        this.username = localStorage.getItem('username')
+        console.log("blahblah : " + this.userID)
+
+       axios.get('http://localhost:8082/alumnia/' + this.userID)
+          .then((response) => {
+        // console.log(response.data)
+        this.user = response.data
+        console.log("เข้ามาได้แล้ว")
+
+        for(i = 0; i< this.user.eventId.length; i++){
+          console.log("this is eventId : "+ this.user.eventId[i])
+            axios.get('http://localhost:8082/showEvent/'+ this.user.eventId[i])
+                  .then((response) =>{
+                    this.event = response.data
+                    console.log("this is event : ")
+                    this.eventArray.push(this.event.event)
+                    this.eventIDArray.push(this.user.eventId[i])
+                  })
+        }
+
+      })
+      .catch((error) => {
+        console.log(error)
+      })
 
 
     }
