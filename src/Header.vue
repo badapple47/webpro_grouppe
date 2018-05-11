@@ -121,6 +121,9 @@ export default {
        this.username = localStorage.getItem('username')
         console.log("blahblah : " + this.userID)
 
+if(this.userID != null){
+
+
        axios.get('http://localhost:8082/alumnia/' + this.userID)
           .then((response) => {
         // console.log(response.data)
@@ -144,6 +147,7 @@ export default {
       })
 
 
+    }
     }
 
 }
