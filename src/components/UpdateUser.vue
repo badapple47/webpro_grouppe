@@ -65,12 +65,12 @@
           <input type="text" class="form-control" placeholder="Name-Surname" v-model="User.nameEng">
         </div>
          <div class="form-group" >
-          <label class="pull-left">วันเกิด</label>
+          <label class="pull-left">วันเกิด *</label>
           
         <input class="form-control" id="date" name="student_dob" placeholder="DD/MM/YYYY" type="text" v-model="User.birthDate">
         </div>
         <div class="form-group" >
-          <label class="pull-left">เลขประจำตัวประชาชน<small style="color:grey;"> *ไม่เปิดเผยต่อสาธารณะ</small></label>
+          <label class="pull-left">เลขประจำตัวประชาชน *<small style="color:grey;"> *ไม่เปิดเผยต่อสาธารณะ</small></label>
           <input type="text" class="form-control" placeholder="เลขประจำตัวประชาชน" v-model="User.nationalID">
         </div>
         <div class="form-group" >
@@ -109,7 +109,7 @@
           <input type="text" class="form-control" placeholder="johnmedapple@gmail.com" v-model="User.email">
         </div>
         <div class="form-group" >
-          <label class="pull-left">เบอร์ติดต่อ</label>
+          <label class="pull-left">เบอร์ติดต่อ *</label>
           <input type="text" class="form-control" placeholder="086XXXXXXX" v-model="User.mobileNo">
         </div>
         <div class="form-group" >
@@ -144,8 +144,7 @@
             <h3 class="panel-title">ผิดพลาด</h3>
           </div>
           <div class="panel-body">
-            กรุณากรอกฟอร์มช่องที่มีเครื่องหมาย * ให้ครบทุกช่อง <br/>
-            <li v-for="error in errors"> - {{ error }} </li>
+            <li v-for="error in errors"> - {{ error }} <br></li>
 
           </div>
         </div>
@@ -204,20 +203,37 @@ export default {
   methods: {
     validateForm(){
 
-        this.errors = []
-       if(this.User.nameTH == ""   || this.User.nameEng == "" || this.User.studentID == "" ||  this.User.department == "" || this.User.nameTH == undefined || this.User.nameEng == undefined || this.User.studentID == undefined || this.User.department == undefined ){
+        
+       if(this.User.nameTH == ""   || this.User.nameTH == undefined ){
         this.warning2 = true ;
+        this.errors.push("กรุณาตรวจสอบชื่อภาษาไทย");
       }
+
+        if( this.User.nameEng == "" ||  this.User.nameEng == undefined ) {
+        this.warning2 = true ;
+        this.errors.push("กรุณาตรวจสอบชื่อภาษาอังกฤษ");
+      }
+
+      if( this.User.department == "" ||  this.User.department == undefined ) {
+        this.warning2 = true ;
+        this.errors.push("กรุณาตรวจสอบภาค");
+      }
+
        if(this.validateEmail(this.User.email) == false ){
         this.warning2 = true ;
         console.log("email wrong format")
         this.errors.push("กรุณาตรวจสอบอีเมลล์");
-        console.log(this.User.nationalID.length)
 
       } 
        if(this.User.nationalID.length != 13){
         this.warning2 = true ;
         this.errors.push("กรุณาตรวจสอบเลข 13 หลัก");
+
+      } 
+
+      if(this.User.studentID.length != 7){
+        this.warning2 = true ;
+        this.errors.push("กรุณาตรวจสอบเลขรหัสนักศึกษา");
 
       } 
 
@@ -227,7 +243,7 @@ export default {
 
       } 
 
-      if(this.validateDate(this.User.birthDate)){
+      if(this.validateDate(this.User.birthDate == false)){
         this.warning2 = true ;
         this.errors.push("กรุณาเช็คฟอร์แมทของวันเกิด");
 
@@ -237,8 +253,9 @@ export default {
     validateDate(date){
 
   var pattern =/^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/;
-    pattern.test(input)
-    
+    pattern.test(date)
+    console.log('kkk')
+
 
     },
 
@@ -254,14 +271,17 @@ console.log("validateEmail ja")
     updateToAPI () {
 
   
-
+this.errors = []
         this.validateForm()
 
+console.log(this.errors.length)
+        if(this.errors.length == 0){
+          this.warning2 = false;
 
-        if(this.errors.length < 0){
+        
     
 
-        console.log(this.User.imageUrl)
+     
 
 
              console.log("CLICK")
