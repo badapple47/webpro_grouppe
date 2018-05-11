@@ -105,7 +105,7 @@
         <h3>ข้อมูลติดต่อ</h3>
         
         <div class="form-group" >
-          <label class="pull-left">อีเมลล์</label>
+          <label class="pull-left">อีเมลล์ *</label>
           <input type="text" class="form-control" placeholder="johnmedapple@gmail.com" v-model="User.email">
         </div>
         <div class="form-group" >
@@ -144,7 +144,9 @@
             <h3 class="panel-title">ผิดพลาด</h3>
           </div>
           <div class="panel-body">
-            กรุณากรอกฟอร์มช่องที่มีเครื่องหมาย * ให้ครบทุกช่อง
+            กรุณากรอกฟอร์มช่องที่มีเครื่องหมาย * ให้ครบทุกช่อง <br/>
+            <li v-for="error in errors"> - {{ error }} </li>
+
           </div>
         </div>
       
@@ -175,6 +177,7 @@ export default {
   name: 'UpdateUser',
   data () {
     return {
+      errors: [],
       warning1 : false ,
       warning2 : false ,
       msg: 'Update User',
@@ -199,13 +202,64 @@ export default {
     }
   },
   methods: {
+    validateForm(){
+
+        this.errors = []
+       if(this.User.nameTH == ""   || this.User.nameEng == "" || this.User.studentID == "" ||  this.User.department == "" || this.User.nameTH == undefined || this.User.nameEng == undefined || this.User.studentID == undefined || this.User.department == undefined ){
+        this.warning2 = true ;
+      }
+       if(this.validateEmail(this.User.email) == false ){
+        this.warning2 = true ;
+        console.log("email wrong format")
+        this.errors.push("กรุณาตรวจสอบอีเมลล์");
+        console.log(this.User.nationalID.length)
+
+      } 
+       if(this.User.nationalID.length != 13){
+        this.warning2 = true ;
+        this.errors.push("กรุณาตรวจสอบเลข 13 หลัก");
+
+      } 
+
+      if(this.User.mobileNo.length != 10){
+        this.warning2 = true ;
+        this.errors.push("กรุณาตรวจสอบเบอร์โทรศัพท์");
+
+      } 
+
+      if(this.validateDate(this.User.birthDate)){
+        this.warning2 = true ;
+        this.errors.push("กรุณาเช็คฟอร์แมทของวันเกิด");
+
+      } 
+      
+    },
+    validateDate(date){
+
+  var pattern =/^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/;
+    pattern.test(input)
+    
+
+    },
+
+validateEmail(email){
+
+console.log("validateEmail ja")
+   var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+    
+  
+},
 
     updateToAPI () {
 
+  
 
-       if(this.User.nameTH == ""   || this.User.nameEng == "" || this.User.studentID == "" ||  this.User.department == "" || this.User.nameTH == undefined || this.User.nameEng == undefined || this.User.studentID == undefined || this.User.department == undefined ){
-        this.warning2 = true ;
-      }else{
+        this.validateForm()
+
+
+        if(this.errors.length < 0){
+    
 
         console.log(this.User.imageUrl)
 
@@ -231,16 +285,16 @@ export default {
       axios.post('http://localhost:8082/updatealumnia/' + this.$route.params.userId, newUser)
         .then((response) => {
           console.log(response)
-          window.location.href = "http://localhost:8080/#/home"
+           window.location.href = "http://localhost:8080/#/home"
 
         })
         .catch((error) => {
           console.log(error)
         })
 
+}
 
-
-      }
+      
 
 
  

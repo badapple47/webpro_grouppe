@@ -7,6 +7,7 @@ import Home from '@/components/Home'
 import Directory from '@/components/Directory'
 import NewsDetail from '@/components/NewsDetail'
 import EventDetail from '@/components/EventDetail'
+import test from '@/components/testValidate'
 
 
 Vue.use(Router)
@@ -46,6 +47,11 @@ export default new Router({
       path: '/event/:userId',
       name: 'EventDetail',
       component: EventDetail
+    },
+    {
+      path: '/test',
+      name: 'test',
+      component: test
     },
   ]
 
