@@ -7,6 +7,11 @@
 
 <div class="panel panel-default">
   <div class="panel-body">
+
+    <div class="page-header">
+  <h2>{{Event.event}} <small ></small></h2> <p class="text-right ">จำนวนการเข้าชม : {{Event.view}}</p>
+</div>
+
                 <span>
                      <img class="eventImage" v-bind:src= Event.image alt="Card image cap" >
                     </span>
@@ -15,7 +20,7 @@
 
               
                       <div class="detail-body" >
-                     <p> {{Event.description}} : Noew this view is => {{Event.view}} </p> 
+                     <p> {{Event.description}}  </p> 
                     </div>
 
                  
@@ -25,6 +30,9 @@
 
 									
   </div>
+  <div class="panel-footer">
+   <p> @{{Event.location}} วันที่ {{Event.dayStart}} {{Event.monthStart}} {{Event.yearStart}} </p>
+    </div>
 </div>
 
 <div class="panel panel-default">
@@ -50,15 +58,18 @@
 <div class="panel panel-default">
   <div class="panel-body">
     <div class="page-header">
-  <h3>Example page header <small>Subtext for header</small></h3>
+  <h3>เข้าร่วมกิจกรรม <small>กับเพื่อนของคุณ</small></h3>
 
 
 </div>
   <div class="col-md-10" >
-    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-for="i in 10">
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-for="(i,index) in userArray" :key="index">
       <div class="friendbox">
-        <img class="friend-pic center-block img-circle" v-bind:src= pic alt="Card image cap">
-        <label>Joey Fat</label>
+                
+        <img class="friend-pic center-block img-circle" v-bind:src= pic  v-if="userIMGArray[index] == undefined || userIMGArray[index] == null" alt="Card image cap">
+        <img class="friend-pic center-block img-circle" v-bind:src= userIMGArray[index] v-else alt="Card image cap">
+
+        <label>{{i}}</label>
       </div>
     </div>
   </div>
@@ -95,17 +106,18 @@
           </div>
         </div>
         
-            <div class="container-fluid">
+            <div class="container-fluid"  >
            <p style="text-align: center;"> คุณต้องการเข้าร่วมงาน {{Event.event}} นี้หรือไม่ </p> </div>
             <button type="button"  class="btn btn-success center-block" style="border-radius: 15px; width: 200px;" v-if="userAlreadyJoinEvent==true" disabled @click="registerEvent">ตกลง</button>
             <button type="button"  class="btn btn-success center-block" style="border-radius: 15px; width: 200px;" v-else  @click="registerEvent">ตกลง</button>
             
           </div>
 
-          
+          <qrcode :value="msg" v-if="userAlreadyJoinEvent==true" class="center-block" > </qrcode >
+          <p style="text-align:center;" v-if="userAlreadyJoinEvent==true">* รหัสยืนยันการสมัคร </p>
 
 
-          <div class="modal-footer">
+          <div class="modal-footer" >
             <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
             
           </div>
@@ -120,6 +132,7 @@
 
 <script>
 import axios from 'axios'
+import VueQrcode from '@xkeshi/vue-qrcode'
 export default {
   name: 'home',
   data () {
@@ -127,8 +140,12 @@ export default {
       msg: 'EGCO427',
       userID :'',
       Event: [],
-      userAlreadyJoinEvent: false,
-      pic: 'https://imagineacademy.microsoft.com/content/images/microsoft-img.png'
+      userArray:[],
+      user:[],
+      userIMGArray:[],
+      userAlreadyJoinEvent: false ,
+      qrCode: '',
+      pic: 'https://www.iphone-droid.net/wp-content/uploads/2013/09/Mamegoma-icon.png'
     }
   },
   methods: {
@@ -174,7 +191,9 @@ export default {
       userIDs.forEach(element => {
         if (element == this.userID) {
           this.userAlreadyJoinEvent = true
-          console.log(this.userAlreadyJoinEvent)
+          this.qrCode = this.userID + this.$route.params.userId
+          console.log(this.qrCode)
+
         }else{
             this.userAlreadyJoinEvent = false
         }
@@ -208,8 +227,37 @@ export default {
         console.log(error)
       })
 
+      axios.get('http://localhost:8082/showEvent/'+this.$route.params.userId)
+          .then((response) => {
+        // console.log(response.data)
+        this.event = response.data
+        console.log("เข้ามาได้แล้วของหน้า Event : " + this.event)
+        var i
+        for(i = 0; i< this.event.userId.length; i++){
+          console.log("this is eventId : "+ this.event.userId[i])
+            axios.get('http://localhost:8082/alumnia/'+ this.event.userId[i])
+                  .then((response) =>{
+                    this.user = response.data
+                    console.log("this is event : "+ this.user.nameTH)
+                    this.userArray.push(this.user.nameTH)
+                    console.log("this is imageURL : "+this.user.imageURL)
+                    this.userIMGArray.push(this.user.imageURL)
+                  })
+        }
 
-  }
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+
+
+  },
+  	components:{
+
+			'qrcode' : VueQrcode
+
+		},
+  
 }
 </script>
 

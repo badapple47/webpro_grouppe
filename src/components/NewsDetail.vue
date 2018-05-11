@@ -1,36 +1,64 @@
 <template>
   <div class="news-detail">
-    <div class="container">
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="/#/home">Home</a></li>
-          <li class="breadcrumb-item active" aria-current="page">{{News.news}}</li>
-        </ol>
-      </nav>
-      <H1>{{News.news}}: Now the views is => {{News.view}} </H1>
-      <span>
-        <img class="news-img" v-bind:src= News.image alt="Card image cap">
-      </span>
-      <div class="detail-body">
-        <p class="paragraph"> {{News.description}}</p>
-        <!-- <p class="paragraph"> สำหรับภาพถ่ายที่ถูกรวบรวมเอาไว้นี้ เป็นภาพถ่ายในอิริยาบทต่าง ๆ ของน้องหมาสายพันธุ์ซามอยด์ ที่แสดงให้เห็นถึงความสดใส ขี้เล่น น่ารัก เป็นมิตร มีลักษณะรูปร่างคล้ายหมีขาวตัวโต จึงไม่แปลกที่น้องหมาพันธุ์นี้จะครองใจและเป็นที่นิยมเลี้ยงไปทั่วโลก</p> -->
-      </div>
-      <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-        <router-link to="eventdetail">
-          <div class="card list-news-card" v-for="i in 4">
-            <div class="row">
-              <span>
-                <img class="list-news-card-img" src="https://pbs.twimg.com/media/DKnbzS3UMAAra8W.jpg:large" alt="Card image cap">
-              </span>
-              <!-- <div class="card-body"> -->
-                <p class="toppic">Cute Chimmy</p>
-                <p class="card-text-cap paragraph">The President's tactics might work in North Korea, but diplomats fear the same approach to Tehran won't work, writes Mark Austin.</p>
-              <!-- </div> -->
-            </div>
-          </div>
-				</router-link>
-      </div>
-    </div><!-- row -->
+    <div class="container event-container" >
+
+
+   
+
+<div class="panel panel-default">
+  <div class="panel-body">
+
+    <div class="page-header">
+  <h2>{{News.event}} <small ></small></h2> <p class="text-right ">จำนวนการเข้าชม : {{News.view}}</p>
+</div>
+
+                <span>
+                     <img class="eventImage" v-bind:src= News.image alt="Card image cap" >
+                    </span>
+                    
+
+
+              
+                      <div class="detail-body" >
+                     <p> {{News.description}}  </p> 
+                    </div>
+
+                 
+
+
+     
+
+									
+  </div>
+  <div class="panel-footer">
+   <p> @{{News.location}} วันที่ {{News.day}} {{News.month}} {{News.year}} </p>
+    </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+
+
+      <GmapMap
+  :center="{lat:13.794650, lng:100.323465}"
+  :zoom="13"
+  map-type-id="terrain"
+  style="width: 800px; height: 300px;"
+>
+
+</GmapMap>
+      
+  
+
+  </div>
+</div>
+
+
+
+
+
+   
+    </div>
   </div>
 </template>
 
@@ -77,8 +105,8 @@ export default {
       axios.get('http://localhost:8082/updateNewsView/' + this.$route.params.userId)
       .then((response) => {
 // console.log(response.data)
-        // this.News = response.data
-        // console.log(this.Event.userId)
+        this.News = response.data
+        console.log(response.data)
 
       })
       .catch((error) => {
@@ -159,5 +187,11 @@ export default {
 }
 a:hover {
     text-decoration: none;
+}
+.eventImage{
+   width: 100%;
+  height: 200px;
+  object-fit: cover;
+
 }
 </style>
