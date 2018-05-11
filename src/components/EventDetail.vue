@@ -78,8 +78,8 @@
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-for="(i,index) in userArray" :key="index">
       <div class="friendbox">
                 
-        <img class="friend-pic center-block img-circle" v-bind:src= pic  v-if="userIMGArray[index] == undefined || userIMGArray[index] == null" alt="Card image cap">
-        <img class="friend-pic center-block img-circle" v-bind:src= userIMGArray[index] v-else alt="Card image cap">
+        <img class="friend-pic center-block img-circle" v-bind:src= pic   v-if="userIMGArray[index] == undefined || userIMGArray[index] == '' || userIMGArray[index] == null " alt="Card image cap">
+       <img class="friend-pic center-block img-circle" v-bind:src= userIMGArray v-else alt="Card image cap">
 
         <label>{{i}}</label>
       </div>

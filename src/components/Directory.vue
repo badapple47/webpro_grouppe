@@ -8,7 +8,7 @@
       <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" >
           <h3 id="alumnia-detail">สมาชิกทั้งหมด  {{Users.length}} คน</h3>
-          <h3 id="alumnia-detail" style="color:#ffcc00; margin-top:0%;">อัพเดทล่าสุด 5/5/2018</h3>
+          <!-- <h3 id="alumnia-detail" style="color:#ffcc00; margin-top:0%;">อัพเดทล่าสุด 5/5/2018</h3> -->
         </div>
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" id="search">
           <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
@@ -37,8 +37,8 @@
         <div class="col-sm-6 col-md-3" v-for="users in filteredUsers" v-bind:key="users._id">
           <div class="thumbnail" @click="modalClicked(users)">
             <br>
-            <img class="img-responsive center-block img-rounded" id="profile-img" v-if="users.imageURL != undefined" v-bind:src= users.imageURL />
-            <img class="img-responsive center-block img-rounded" id="profile-img" v-else v-bind:src= imageDefault />
+            <img class="img-responsive center-block img-rounded" id="profile-img" v-if="users.imageURL == undefined || users.imageURL == '' || users.imageURL == null " v-bind:src= imageDefault />
+            <img class="img-responsive center-block img-rounded" id="profile-img" v-else v-bind:src= users.imageURL />
             <div class="caption">
               <h4>{{users.nameTH}} </h4>
               <p>{{users.nameEng}}</p>

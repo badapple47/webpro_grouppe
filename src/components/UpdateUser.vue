@@ -9,8 +9,10 @@
         <div class="row" >
 
 
-      <img class="img-responsive center-block" id="profile-img" v-if="User.imageURL != ''" v-bind:src= User.imageURL />
-      <img class="img-responsive center-block" id="profile-img"  v-if="User.imageURL == ''"  v-bind:src= imageDefault />
+      <!-- <img class="img-responsive center-block" id="profile-img" v-if="User.imageURL != ''" v-bind:src= User.imageURL /> -->
+      <img class="img-responsive center-block" id="profile-img"  v-if="User.imageURL == undefined || User.imageURL == '' || User.imageURL == null "  v-bind:src= imageDefault />
+      <img class="img-responsive center-block" id="profile-img"  v-else  v-bind:src= User.imageURL />
+      
   
 
 
@@ -229,7 +231,7 @@ export default {
       axios.post('http://localhost:8082/updatealumnia/' + this.$route.params.userId, newUser)
         .then((response) => {
           console.log(response)
-          window.location.href = "http://localhost:8080/#/home"
+          // window.location.href = "http://localhost:8080/#/home"
 
         })
         .catch((error) => {
