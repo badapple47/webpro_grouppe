@@ -58,9 +58,9 @@
     <li class="disabled"><a  aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
     <li class="active" @click="sortPaginition(1)"><a >1 <span class="sr-only">(current)</span></a></li>
     <li class="active"><a  @click="sortPaginition(2)">2 <span class="sr-only">(current)</span></a></li>
-		<li ><a  @click="sortPaginition(3)">3 <span class="sr-only">(current)</span></a></li>
-		<li ><a >4 <span class="sr-only">(current)</span></a></li>
-		<li ><a >5 <span class="sr-only">(current)</span></a></li>
+		<li class="active"><a  @click="sortPaginition(3)">3 <span class="sr-only">(current)</span></a></li>
+		<li class="active"><a >4 <span class="sr-only">(current)</span></a></li>
+		<li class="active"><a >5 <span class="sr-only">(current)</span></a></li>
 		 <li>
       <a href="#" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>
