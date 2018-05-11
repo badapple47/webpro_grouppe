@@ -63,10 +63,10 @@
 
 </div>
   <div class="col-md-10" >
-    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-for="i in 10">
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-for="(i,index) in userArray" :key="index">
       <div class="friendbox">
-        <img class="friend-pic center-block img-circle" v-bind:src= pic alt="Card image cap">
-        <label>Joey Fat</label>
+        <img class="friend-pic center-block img-circle" v-bind:src= userIMGArray[index] alt="Card image cap">
+        <label>{{i}}</label>
       </div>
     </div>
   </div>
@@ -137,6 +137,11 @@ export default {
       msg: 'EGCO427',
       userID :'',
       Event: [],
+      userAlreadyJoinEvent: false,
+      event:[],
+      userArray:[],
+      user:[],
+      userIMGArray:[],
       userAlreadyJoinEvent: false ,
       qrCode: '',
       pic: 'https://www.iphone-droid.net/wp-content/uploads/2013/09/Mamegoma-icon.png'
@@ -208,6 +213,29 @@ export default {
 // console.log(response.data)
         this.Event = response.data
         // console.log(this.Event.userId)
+
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+
+      axios.get('http://localhost:8082/showEvent/'+this.$route.params.userId)
+          .then((response) => {
+        // console.log(response.data)
+        this.event = response.data
+        console.log("เข้ามาได้แล้วของหน้า Event : " + this.event)
+        var i
+        for(i = 0; i< this.event.userId.length; i++){
+          console.log("this is eventId : "+ this.event.userId[i])
+            axios.get('http://localhost:8082/alumnia/'+ this.event.userId[i])
+                  .then((response) =>{
+                    this.user = response.data
+                    console.log("this is event : "+ this.user.nameTH)
+                    this.userArray.push(this.user.nameTH)
+                    console.log("this is imageURL : "+this.user.imageURL)
+                    this.userIMGArray.push(this.user.imageURL)
+                  })
+        }
 
       })
       .catch((error) => {
