@@ -8,14 +8,14 @@
       <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" >
           <h3 id="alumnia-detail">สมาชิกทั้งหมด  {{Users.length}} คน</h3>
-          <!-- <h3 id="alumnia-detail" style="color:#ffcc00; margin-top:0%;">อัพเดทล่าสุด 5/5/2018</h3> -->
+          <h3 id="alumnia-detail" style="color:#ffcc00; margin-top:0%;">อัพเดทล่าสุด 5/5/2018</h3>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" id="search">
           <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
             <div class="input-group" >
               <input type="text" class="form-control" placeholder="Search for..." v-model="search" @click="sortMode(1)">
               <span class="input-group-btn">
-                <button class="btn btn-default" type="button" ><i class="fas fa-search"></i></button>
+                <button class="btn btn-default" type="button" >Go!</button>
               </span>
             </div>
           </div>
@@ -224,7 +224,6 @@
 .thumbnail {
   margin-top: 40px;
   border-radius: 20px;
-  cursor: pointer;
 }
 .modal-body{
   padding-bottom: 40px;

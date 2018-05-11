@@ -9,8 +9,8 @@
         <div class="row" >
 
 
-      <img class="img-responsive center-block" id="profile-img" v-if="User.imageURL != undefined" v-bind:src= User.imageURL />
-      <img class="img-responsive center-block" id="profile-img"  v-if="User.imageURL == undefined"  v-bind:src= imageDefault />
+      <img class="img-responsive center-block" id="profile-img" v-if="User.imageURL != ''" v-bind:src= User.imageURL />
+      <img class="img-responsive center-block" id="profile-img"  v-if="User.imageURL == ''"  v-bind:src= imageDefault />
   
 
 
@@ -197,6 +197,7 @@ export default {
     }
   },
   methods: {
+
     updateToAPI () {
 
 
