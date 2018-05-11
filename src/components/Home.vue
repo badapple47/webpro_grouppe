@@ -55,12 +55,12 @@
 					</div>
 					<nav aria-label="...">
   <ul class="pagination pagination-sm">
-    <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-    <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-    <li ><a href="#">2 <span class="sr-only">(current)</span></a></li>
-		<li ><a href="#">3 <span class="sr-only">(current)</span></a></li>
-		<li ><a href="#">4 <span class="sr-only">(current)</span></a></li>
-		<li ><a href="#">5 <span class="sr-only">(current)</span></a></li>
+    <li class="disabled"><a  aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+    <li class="active" @click="sortPaginition(1)"><a >1 <span class="sr-only">(current)</span></a></li>
+    <li class="active"><a  @click="sortPaginition(2)">2 <span class="sr-only">(current)</span></a></li>
+		<li ><a  @click="sortPaginition(3)">3 <span class="sr-only">(current)</span></a></li>
+		<li ><a >4 <span class="sr-only">(current)</span></a></li>
+		<li ><a >5 <span class="sr-only">(current)</span></a></li>
 		 <li>
       <a href="#" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>
@@ -121,6 +121,7 @@ export default {
         uid: "",
 				search: '',
 				news:[],
+				paginition : "1", 
       };
   },
   methods: {
@@ -137,6 +138,21 @@ export default {
       doc.addHTML(document.body,function() {
           doc.save('html.pdf');
       });
+
+	 },
+	 sortPaginition(number){
+		 console.log("trigger paginition "+number)
+
+		 axios
+        .get("http://localhost:8082/showEventByPage/" +number)
+        .then(response => {
+          
+          this.events = response.data;
+          console.log(this.events);
+        })
+        .catch(error => {
+          console.log(error);
+				});
 
 	 }
 	},
@@ -207,11 +223,11 @@ export default {
 			})
 
 			axios
-        .get("http://localhost:8082/event")
+        .get("http://localhost:8082/showEventByPage/" +this.paginition)
         .then(response => {
           
           this.events = response.data;
-          // console.log(this.events);
+          console.log(this.events);
         })
         .catch(error => {
           console.log(error);
