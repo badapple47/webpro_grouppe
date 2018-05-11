@@ -28,7 +28,7 @@
 
      
 
-									
+         
   </div>
   <div class="panel-footer">
    <p> @{{Event.location}} วันที่ {{Event.dayStart}} {{Event.monthStart}} {{Event.yearStart}} </p>
@@ -76,7 +76,7 @@
 
      <div class="col-md-2" >
        <button class="btn btn-outline-secondary read-more-btn"  @click="checkIfUserAlreadyJoinEvent" tag="button" type="button" data-toggle="modal" data-target=".eventRegister">
-										<span>สมัคร</span>
+          <span>สมัคร</span>
  </button>    
     </div>
 
@@ -140,12 +140,15 @@ export default {
       msg: 'EGCO427',
       userID :'',
       Event: [],
+      userAlreadyJoinEvent: false,
+      event:[],
       userArray:[],
       user:[],
       userIMGArray:[],
       userAlreadyJoinEvent: false ,
       qrCode: '',
       pic: 'https://www.iphone-droid.net/wp-content/uploads/2013/09/Mamegoma-icon.png'
+
     }
   },
   methods: {
@@ -178,24 +181,16 @@ export default {
     },
     checkIfUserAlreadyJoinEvent(){
 
-      // if(this.Event.userId[0] == this.userID){
-      //   // this.userAlreadyJoinEvent = true
-      //   console.log('ds')
-      //   // console.log(userAlreadyJoinEvent)
-      // }else{
-      //   console.log(this.Event.userId[0])
-      // }
-
-  //by inw ball
-      let userID = this.Event.userId
-      userIDs.forEach(element => {
+  let userID = this.Event.userId
+      userID.forEach(element => {
         if (element == this.userID) {
+
           this.userAlreadyJoinEvent = true
           this.qrCode = this.userID + this.$route.params.userId
           console.log(this.qrCode)
 
         }else{
-            this.userAlreadyJoinEvent = false
+          this.userAlreadyJoinEvent = false
         }
         
       });
@@ -252,17 +247,18 @@ export default {
 
 
   },
-  	components:{
+   components:{
 
-			'qrcode' : VueQrcode
+   'qrcode' : VueQrcode
 
-		},
+  },
   
 }
 </script>
 
 <style>
 .event-container{
+  /* margin: 0px 150px 0px 150px; */
   width: 60%;
 }
 .news-detail{
@@ -274,7 +270,7 @@ export default {
 .news-img{
   width: 100%;
   height: 400px;
-  padding: 20px;
+  margin: 20px;
   object-fit: scale-down;
 }
 .detail-body{
@@ -284,7 +280,7 @@ export default {
   text-indent: 40pt;
 }
 .read-more-btn{
-	border-radius: 50px;
+ border-radius: 50px;
 }
 .btn-outline-secondary {
     color: #6c757d;
@@ -307,4 +303,5 @@ export default {
 .friendbox{
   text-align: center;
 }
+
 </style>
