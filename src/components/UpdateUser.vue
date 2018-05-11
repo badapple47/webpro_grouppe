@@ -231,7 +231,7 @@ export default {
       axios.post('http://localhost:8082/updatealumnia/' + this.$route.params.userId, newUser)
         .then((response) => {
           console.log(response)
-          // window.location.href = "http://localhost:8080/#/home"
+          window.location.href = "http://localhost:8080/#/home"
 
         })
         .catch((error) => {
