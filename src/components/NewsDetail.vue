@@ -31,7 +31,7 @@
 									
   </div>
   <div class="panel-footer">
-   <p> @{{News.location}} วันที่ {{News.dayStart}} {{News.monthStart}} {{News.yearStart}} </p>
+   <p> @{{News.location}} วันที่ {{News.day}} {{News.month}} {{News.year}} </p>
     </div>
 </div>
 
@@ -105,8 +105,8 @@ export default {
       axios.get('http://localhost:8082/updateNewsView/' + this.$route.params.userId)
       .then((response) => {
 // console.log(response.data)
-        // this.News = response.data
-        // console.log(this.Event.userId)
+        this.News = response.data
+        console.log(response.data)
 
       })
       .catch((error) => {
@@ -149,5 +149,11 @@ export default {
 }
 .paragraph{
   text-indent: 40pt;
+}
+.eventImage{
+   width: 100%;
+  height: 200px;
+  object-fit: cover;
+
 }
 </style>
