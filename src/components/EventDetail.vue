@@ -87,12 +87,13 @@
   </div>
 
      <div class="col-md-2" >
-       <button class="btn btn-outline-secondary read-more-btn"  v-if="checkIfUserAlreadyJoinEvent==false" @click="checkIfUserAlreadyJoinEvent" tag="button" type="button" data-toggle="modal" data-target=".eventRegister">
+         <button class="btn btn-outline-secondary read-more-btn" v-if="userAlreadyJoinEvent==true" tag="button" type="button" data-toggle="modal" data-target=".eventRegister">
+										<span>ดู QR Code</span>
+ </button>   
+       <button class="btn btn-outline-secondary read-more-btn" v-else   @click="checkIfUserAlreadyJoinEvent" tag="button" type="button" data-toggle="modal" data-target=".eventRegister">
 										<span>สมัคร</span>
  </button>    
-  <button class="btn btn-outline-secondary read-more-btn" v-else tag="button" type="button" data-toggle="modal" data-target=".eventRegister">
-										<span>ดู QR Code</span>
- </button>    
+ 
     </div>
 
  
@@ -195,6 +196,8 @@ export default {
         location.reload();
     },
     checkIfUserAlreadyJoinEvent(){
+
+      console.log("mounted")
       
 
 
@@ -204,10 +207,12 @@ export default {
 
           this.userAlreadyJoinEvent = true
           this.qrCode = this.userID + this.$route.params.userId
-          console.log(this.qrCode)
+          console.log("true")
 
         }else{
-          this.userAlreadyJoinEvent = false
+          
+          // this.userAlreadyJoinEvent = false
+          console.log("flase")
         }
         
       });
@@ -246,15 +251,15 @@ export default {
         // console.log(response.data)
         this.event = response.data
         console.log("เข้ามาได้แล้วของหน้า Event : " + this.event)
-        var i
+        let i
         for(i = 0; i< this.event.userId.length; i++){
           console.log("this is eventId : "+ this.event.userId[i])
             axios.get('http://localhost:8082/alumnia/'+ this.event.userId[i])
                   .then((response) =>{
                     this.user = response.data
-                    console.log("this is event : "+ this.user.nameTH)
+                    console.log(this.user.nameTH)
+
                     this.userArray.push(this.user.nameTH)
-                    console.log("this is imageURL : "+this.user.imageURL)
                     this.userIMGArray.push(this.user.imageURL)
                   })
         }
