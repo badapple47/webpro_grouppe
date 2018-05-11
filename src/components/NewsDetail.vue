@@ -9,7 +9,7 @@
   <div class="panel-body">
 
     <div class="page-header">
-  <h2>{{News.event}} <small ></small></h2> <p class="text-right ">จำนวนการเข้าชม : {{News.view}}</p>
+  <h2>{{News.news}} <small ></small></h2> <p class="text-right ">จำนวนการเข้าชม : {{News.view}}</p>
 </div>
 
                 <span>
@@ -155,5 +155,9 @@ export default {
   height: 200px;
   object-fit: cover;
 
+}
+.event-container{
+  /* margin: 0px 150px 0px 150px; */
+  width: 60%;
 }
 </style>

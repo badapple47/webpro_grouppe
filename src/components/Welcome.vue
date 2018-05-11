@@ -78,7 +78,32 @@
       <input type="password" class="form-control" id="conpwd" v-model="User.confirmPassword">
     </div>
 
-    <button data-dismiss="modal" to="/home"  @click="register" class="btn btn-primary" tag="button" type="button">
+      <div class="modal-body">
+             <div class="panel panel-danger" v-if="checkConfirmPasswordPass == false">
+          <div class="panel-heading">
+            <h3 class="panel-title">ผิดพลาด</h3>
+          </div>
+          <div class="panel-body">
+            กรุณากรอก password ให้ตรงกันทั้งสองช่อง
+          </div>
+        </div>
+        </div>
+
+        <div class="modal-body">
+             <div class="panel panel-success" v-if="registerSuccess == true">
+          <div class="panel-heading">
+            <h3 class="panel-title">ยินดีด้วย</h3>
+          </div>
+          <div class="panel-body">
+            คุณสามารใช้ username และ password นี้ login ได้ทันที
+          </div>
+        </div>
+        </div>
+
+    <button  @click="register" class="btn btn-primary" tag="button" type="button" disabled v-if="registerSuccess == true">
+              <span >Register</span>
+            </button>
+            <button  @click="register" class="btn btn-primary" tag="button" type="button" v-else>
               <span >Register</span>
             </button>
 
@@ -110,25 +135,47 @@ export default {
        User: {
         username: '',
         password: '',
-      }
+      },
+      checkConfirmPasswordPass: true,
+      registerSuccess: false
     }
   },
   methods: {
 
     register () {
-      let newUser = {
+
+      if(this.User.password == this.User.confirmPassword){
+
+        
+
+        let newUser = {
         username: this.User.username,
         password: this.User.password,
       }
+
+      
       console.log(newUser)
       axios.post('http://localhost:8082/register', newUser)
         .then((response) => {
           console.log(response)
+          this.registerSuccess = true
+          this.checkConfirmPasswordPass = true
           
         })
         .catch((error) => {
           console.log(error)
         })
+
+      }else{
+
+        
+        this.checkConfirmPasswordPass = false
+
+        
+
+      }
+
+      
     },
 
     login(){

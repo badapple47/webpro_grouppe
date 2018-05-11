@@ -65,7 +65,7 @@
          <div class="form-group" >
           <label class="pull-left">วันเกิด</label>
           
-        <input class="form-control" id="date" name="student_dob" placeholder="MM/DD/YYYY" type="text" v-model="User.birthDate">
+        <input class="form-control" id="date" name="student_dob" placeholder="DD/MM/YYYY" type="text" v-model="User.birthDate">
         </div>
         <div class="form-group" >
           <label class="pull-left">เลขประจำตัวประชาชน<small style="color:grey;"> *ไม่เปิดเผยต่อสาธารณะ</small></label>

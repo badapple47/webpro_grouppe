@@ -20,6 +20,18 @@
 
               
                       <div class="detail-body" >
+
+                        <div class="modal-body">
+             <div class="panel panel-success" v-if="userAlreadyJoinEvent == true">
+          <div class="panel-heading">
+            <h3 class="panel-title">ยินดีด้วย</h3>
+          </div>
+          <div class="panel-body">
+            คุณสามารถเข้าไปรับ QR Code ยืนยันการสมัครได้โดยการกดสมัครอีกครั้ง 
+          </div>
+        </div>
+        </div>
+
                      <p> {{Event.description}}  </p> 
                     </div>
 
@@ -75,8 +87,11 @@
   </div>
 
      <div class="col-md-2" >
-       <button class="btn btn-outline-secondary read-more-btn"  @click="checkIfUserAlreadyJoinEvent" tag="button" type="button" data-toggle="modal" data-target=".eventRegister">
+       <button class="btn btn-outline-secondary read-more-btn"  v-if="checkIfUserAlreadyJoinEvent==false" @click="checkIfUserAlreadyJoinEvent" tag="button" type="button" data-toggle="modal" data-target=".eventRegister">
 										<span>สมัคร</span>
+ </button>    
+  <button class="btn btn-outline-secondary read-more-btn" v-else tag="button" type="button" data-toggle="modal" data-target=".eventRegister">
+										<span>ดู QR Code</span>
  </button>    
     </div>
 
@@ -180,6 +195,8 @@ export default {
         location.reload();
     },
     checkIfUserAlreadyJoinEvent(){
+      
+
 
   let userID = this.Event.userId
       userID.forEach(element => {
@@ -199,6 +216,8 @@ export default {
  
   },
   mounted(){
+
+   
     this.userID = localStorage.getItem('userID')
 
     axios.get('http://localhost:8082/updateEventView/' + this.$route.params.userId)
@@ -240,6 +259,7 @@ export default {
                   })
         }
 
+ this.checkIfUserAlreadyJoinEvent()
       })
       .catch((error) => {
         console.log(error)

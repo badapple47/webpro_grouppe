@@ -1,8 +1,6 @@
 /* eslint-disable */
 import Vue from 'vue'
 import Router from 'vue-router'
-import UserList from '@/components/UserList'
-import AddUser from '@/components/AddUser'
 import UpdateUser from '@/components/UpdateUser'
 import Welcome from '@/components/Welcome'
 import Home from '@/components/Home'
@@ -21,11 +19,7 @@ export default new Router({
       name: 'Home',
       component: Home
     },
-    {
-      path: '/adduser',
-      name: 'AddUser',
-      component: AddUser
-    },
+
     {
       // path: '/updateuser/',
       path: '/updateuser/:userId',
