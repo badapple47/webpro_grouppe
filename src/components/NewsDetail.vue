@@ -132,16 +132,22 @@ export default {
 </script>
 
 <style>
+.news-container{
+  width: 90%;
+}
 .news-detail{
   text-align: left;
 }
 .breadcrumb{
   text-align: left;
 }
+.news-detail-row{
+  margin: 0px;
+}
 .news-img{
   width: 100%;
   height: 400px;
-  margin: 20px;
+  padding: 20px;
   object-fit: scale-down;
 }
 .detail-body{
@@ -149,6 +155,38 @@ export default {
 }
 .paragraph{
   text-indent: 40pt;
+}
+.list-news-card-img{
+	width: 100%;
+  height: 280px;
+  object-fit: cover;
+}
+.card{
+  border-style: none;
+}
+.card-body{
+  padding: 10px;
+}
+.card-text-cap{
+  text-overflow: ellipsis;
+}
+.list-news-card{
+  width: 80%;
+	text-align: left;
+  color: black;
+  margin: 50px 0px 20px 0px;
+  border-radius: 0px;
+}
+.no-padding{
+  padding: 0px;
+}
+.toppic{
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: 600;
+}
+a:hover {
+    text-decoration: none;
 }
 .eventImage{
    width: 100%;

@@ -40,7 +40,7 @@
 
      
 
-									
+         
   </div>
   <div class="panel-footer">
    <p> @{{Event.location}} วันที่ {{Event.dayStart}} {{Event.monthStart}} {{Event.yearStart}} </p>
@@ -272,11 +272,11 @@ export default {
 
 
   },
-  	components:{
+   components:{
 
-			'qrcode' : VueQrcode
+   'qrcode' : VueQrcode
 
-		},
+  },
   
 }
 </script>
@@ -305,7 +305,7 @@ export default {
   text-indent: 40pt;
 }
 .read-more-btn{
-	border-radius: 50px;
+ border-radius: 50px;
 }
 .btn-outline-secondary {
     color: #6c757d;
