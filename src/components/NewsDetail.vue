@@ -117,7 +117,7 @@ export default {
       .then((response) => {
 // console.log(response.data)
         this.News = response.data
-        // console.log(this.Event.userId)
+        console.log(this.News.location)
 
       })
       .catch((error) => {
