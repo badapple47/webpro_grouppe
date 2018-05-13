@@ -53,26 +53,22 @@
 							</router-link>
 						</div>
 					</div>
-					<nav aria-label="...">
-  <ul class="pagination pagination-sm">
-    <li class="disabled"><a  aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-    <li class="active" @click="sortPaginition(1)"><a >1 <span class="sr-only">(current)</span></a></li>
-    <li class="active"><a  @click="sortPaginition(2)">2 <span class="sr-only">(current)</span></a></li>
-		<li class="active"><a  @click="sortPaginition(3)">3 <span class="sr-only">(current)</span></a></li>
-		<li class="active"><a >4 <span class="sr-only">(current)</span></a></li>
-		<li class="active"><a >5 <span class="sr-only">(current)</span></a></li>
-		 <li>
-      <a href="#" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
-  </ul>
-	
-</nav>
-
 				</div> <!-- list-event -->
 			</div>
-
+			<div class="paginationn col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<nav aria-label="...">
+				  <ul class="pagination pagination-sm" >
+				    <!--<li class="disabled"><a  aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>-->
+				    <li class="active" v-for="(i,index) in buttonCount" :key="index"><a @click="sortPaginition(index+1)">{{i}} <span class="sr-only">(current)</span></a></li>
+					<!--<li>-->
+					   	<!-- <a href="#" aria-label="Next">-->
+				    	<!--  <span aria-hidden="true">&raquo;</span>-->
+				      	<!--</a>-->
+				    <!--</li>-->
+				  </ul>
+		
+				</nav>
+			</div>
 
 
 			<div class="news col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -109,19 +105,19 @@
 
 <script>
 import axios from 'axios'
-import jsPDF from 'jsPDF'
 import VueQrcode from '@xkeshi/vue-qrcode'
 
 export default {
   name: 'home',
   data () {
  return {
-				Users: [],
-				events: [],
+		Users: [],
+		events: [],
         uid: "",
-				search: '',
-				news:[],
-				paginition : "1", 
+		search: '',
+		news:[],
+		buttonCount: 0,
+		paginition : "1", 
       };
   },
   methods: {
@@ -144,10 +140,10 @@ export default {
 		 console.log("trigger paginition "+number)
 
 		 axios
-        .get("http://localhost:8082/showEventByPage/" +number)
+        .get("http://egco427-project-badapple47.c9users.io:8082/showEventByPage/" +number)
         .then(response => {
           
-          this.events = response.data;
+          this.events = response.data.eventArray;
           console.log(this.events);
         })
         .catch(error => {
@@ -201,16 +197,16 @@ export default {
 	 
 	 console.log("Mounted")
     if(localStorage.getItem('Token') == null){
-      window.location.href = "http://localhost:8080/#/"
+      window.location.href = "http://egco427-project-badapple47.c9users.io:8080/#/"
 		}
 		
-    axios.get('http://localhost:8082/alumnia/' + localStorage.getItem('userID'))
+    axios.get('http://egco427-project-badapple47.c9users.io:8082/alumnia/' + localStorage.getItem('userID'))
       .then((response) => {
 				console.log(response.data.nameTH);
 				 this.Users = response.data;
 
 				 		if(this.Users.nameTH == undefined){
-					 window.location.href = "http://localhost:8080/#/updateuser/" + this.Users._id
+					 window.location.href = "http://egco427-project-badapple47.c9users.io:8080/#/updateuser/" + this.Users._id
 					 location.reload();
 				 }else{
  localStorage.setItem('nameTH', this.Users.nameTH);
@@ -223,20 +219,22 @@ export default {
 			})
 
 			axios
-        .get("http://localhost:8082/showEventByPage/" +this.paginition)
+        .get("http://egco427-project-badapple47.c9users.io:8082/showEventByPage/" +this.paginition)
         .then(response => {
           
-          this.events = response.data;
-          console.log(this.events);
+          this.events = response.data.eventArray;
+          this.buttonCount = response.data.buttonCount;
+          console.log("this is event!!!!!!! : "+this.events.buttonCount);
+          //console.log("this is buttonCount : "+ this.events.buttonCount)
         })
         .catch(error => {
           console.log(error);
 				});
 				
 					axios
-        .get("http://localhost:8082/news")
+        .get("http://egco427-project-badapple47.c9users.io:8082/news")
         .then(response => {
-          
+          console.log("this is news"+ response.data)
           this.news = response.data;
           
         })
@@ -360,6 +358,9 @@ export default {
 .paragraph{
   text-indent: 25pt;
 	text-align: justify;
+}
+.paginationn{
+	margin-bottom: 20px;
 }
 a:hover {
     text-decoration: none;

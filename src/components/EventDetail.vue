@@ -163,7 +163,7 @@ export default {
       userIMGArray:[],
       userAlreadyJoinEvent: false ,
       qrCode: '',
-      pic: 'https://www.iphone-droid.net/wp-content/uploads/2013/09/Mamegoma-icon.png'
+      pic: 'http://www.iphone-droid.net/wp-content/uploads/2013/09/Mamegoma-icon.png'
 
     }
   },
@@ -175,7 +175,7 @@ export default {
      
       }
       console.log(eventInfo)
-      axios.post('http://localhost:8082/updateMemberInEvent', eventInfo)
+      axios.post('http://egco427-project-badapple47.c9users.io:8082/updateMemberInEvent', eventInfo)
         .then((response) => {
           console.log(response.data)
           
@@ -184,7 +184,7 @@ export default {
           console.log(error)
         })
 
-         axios.post('http://localhost:8082/updateEventInMember', eventInfo)
+         axios.post('http://egco427-project-badapple47.c9users.io:8082/updateEventInMember', eventInfo)
         .then((response) => {
           console.log(response.data)
           
@@ -225,7 +225,7 @@ export default {
    
     this.userID = localStorage.getItem('userID')
 
-    axios.get('http://localhost:8082/updateEventView/' + this.$route.params.userId)
+    axios.get('http://egco427-project-badapple47.c9users.io:8082/updateEventView/' + this.$route.params.userId)
       .then((response) => {
 // console.log(response.data)
         // console.log(this.Event.userId)
@@ -235,7 +235,7 @@ export default {
         console.log(error)
       })
 
-     axios.get('http://localhost:8082/showEvent/' + this.$route.params.userId)
+     axios.get('http://egco427-project-badapple47.c9users.io:8082/showEvent/' + this.$route.params.userId)
       .then((response) => {
 // console.log(response.data)
         this.Event = response.data
@@ -246,7 +246,7 @@ export default {
         console.log(error)
       })
 
-      axios.get('http://localhost:8082/showEvent/'+this.$route.params.userId)
+      axios.get('http://egco427-project-badapple47.c9users.io:8082/showEvent/'+this.$route.params.userId)
           .then((response) => {
         // console.log(response.data)
         this.event = response.data
@@ -254,7 +254,7 @@ export default {
         let i
         for(i = 0; i< this.event.userId.length; i++){
           console.log("this is eventId : "+ this.event.userId[i])
-            axios.get('http://localhost:8082/alumnia/'+ this.event.userId[i])
+            axios.get('http://egco427-project-badapple47.c9users.io:8082/alumnia/'+ this.event.userId[i])
                   .then((response) =>{
                     this.user = response.data
                     console.log(this.user.nameTH)

@@ -84,13 +84,13 @@ export default {
      
       }
       console.log(newUser)
-      axios.post('http://localhost:8082/authen', newUser)
+      axios.post('http://egco427-project-badapple47.c9users.io:8082/authen', newUser)
         .then((response) => {
           console.log(response.data)
           if(response.data == "Okay!"){
             console.log("Okay let's go")
             localStorage.setItem('Token', 'asdasdasdasd');
-           window.location.href = "http://localhost:8080/#/home"
+           window.location.href = "http://egco427-project-badapple47.c9users.io:8080/#/home"
 
           }
         })
@@ -102,7 +102,7 @@ export default {
   mounted(){
     this.userID = localStorage.getItem('userID')
 
-      axios.get('http://localhost:8082/updateNewsView/' + this.$route.params.userId)
+      axios.get('http://egco427-project-badapple47.c9users.io:8082/updateNewsView/' + this.$route.params.userId)
       .then((response) => {
 // console.log(response.data)
         this.News = response.data
@@ -113,7 +113,7 @@ export default {
         console.log(error)
       })
 
-     axios.get('http://localhost:8082/showNews/' + this.$route.params.userId)
+     axios.get('http://egco427-project-badapple47.c9users.io:8082/showNews/' + this.$route.params.userId)
       .then((response) => {
 // console.log(response.data)
         this.News = response.data

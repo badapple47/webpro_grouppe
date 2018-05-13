@@ -116,13 +116,12 @@
 
 <script>
   import axios from "axios";
-  import jsPDF from 'jsPDF'
 
   export default {
     
     data() {
       return {
-        imageDefault: 'https://www.iphone-droid.net/wp-content/uploads/2013/09/Mamegoma-icon.png',
+        imageDefault: 'http://www.iphone-droid.net/wp-content/uploads/2013/09/Mamegoma-icon.png',
         Users: [],
         uid: "",
         search: "",
@@ -136,7 +135,7 @@
     methods: {
       logout() {
         localStorage.removeItem("Token");
-        window.location.href = "http://localhost:8080/#/";
+        window.location.href = "http://egco427-project-badapple47.c9users.io:8080/#/";
       },
       sortMode(mode){
         if(mode == 1){
@@ -201,14 +200,14 @@
       localStorage.setItem('Header', 'true');
 
       if(localStorage.getItem('Token') == null ){
-        window.location.href = "http://localhost:8080/#/"
+        window.location.href = "http://egco427-project-badapple47.c9users.io:8080/#/"
       }
       else if(localStorage.getItem('nameTH') == null) {
-        window.location.href = "http://localhost:8080/#/updateuser/" + localStorage.getItem('userID')
+        window.location.href = "http://egco427-project-badapple47.c9users.io:8080/#/updateuser/" + localStorage.getItem('userID')
       }
    
       axios
-        .get("http://localhost:8082/alumnia")
+        .get("http://egco427-project-badapple47.c9users.io:8082/alumnia")
         .then(response => {
           this.Users = response.data;
           console.log(this.Users);

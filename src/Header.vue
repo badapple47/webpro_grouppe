@@ -87,7 +87,7 @@ export default {
   methods: {
     logout() {
       localStorage.clear();
-      window.location.href = "http://localhost:8080/#/";
+      window.location.href = "http://egco427-project-badapple47.c9users.io:8080/#/";
     },
     toEventPage(num) {
       var thisfunc = this
@@ -112,14 +112,14 @@ export default {
     this.username = localStorage.getItem('username')
     console.log("blahblah : " + this.userID)
     if(this.userID != null){
-      axios.get('http://localhost:8082/alumnia/' + this.userID)
+      axios.get('http://egco427-project-badapple47.c9users.io:8082/alumnia/' + this.userID)
         .then((response) => {
           // console.log(response.data)
           this.user = response.data
           console.log("เข้ามาได้แล้ว")
           for(i = 0; i< this.user.eventId.length; i++){
             console.log("this is eventId : "+ this.user.eventId[i])
-            axios.get('http://localhost:8082/showEvent/'+ this.user.eventId[i])
+            axios.get('http://egco427-project-badapple47.c9users.io:8082/showEvent/'+ this.user.eventId[i])
               .then((response) =>{
                 this.event = response.data
                 console.log("this is event : ")

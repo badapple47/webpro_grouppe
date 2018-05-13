@@ -195,7 +195,7 @@ export default {
         
 
       },
-      imageDefault: 'https://www.iphone-droid.net/wp-content/uploads/2013/09/Mamegoma-icon.png',
+      imageDefault: 'http://www.iphone-droid.net/wp-content/uploads/2013/09/Mamegoma-icon.png',
     }
   },
   methods: {
@@ -228,10 +228,10 @@ export default {
         birthDate: this.User.birthDate,
       }
       console.log(newUser)
-      axios.post('http://localhost:8082/updatealumnia/' + this.$route.params.userId, newUser)
+      axios.post('http://egco427-project-badapple47.c9users.io:8082/updatealumnia/' + this.$route.params.userId, newUser)
         .then((response) => {
           console.log(response)
-          window.location.href = "http://localhost:8080/#/home"
+          window.location.href = "http://egco427-project-badapple47.c9users.io:8080/#/home"
 
         })
         .catch((error) => {
@@ -247,7 +247,7 @@ export default {
     }
   },
   mounted () {
-    axios.get('http://localhost:8082/alumnia/' + this.$route.params.userId)
+    axios.get('http://egco427-project-badapple47.c9users.io:8082/alumnia/' + this.$route.params.userId)
       .then((response) => {
 console.log(response.data)
         this.User = response.data

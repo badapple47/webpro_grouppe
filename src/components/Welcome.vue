@@ -155,9 +155,9 @@ export default {
 
       
       console.log(newUser)
-      axios.post('http://localhost:8082/register', newUser)
+      axios.post('http://egco427-project-badapple47.c9users.io:8082/register', newUser)
         .then((response) => {
-          console.log(response)
+          console.log("this is authen response : "+response)
           this.registerSuccess = true
           this.checkConfirmPasswordPass = true
           
@@ -185,7 +185,7 @@ export default {
      
       }
       console.log(newUser)
-      axios.post('http://localhost:8082/authen', newUser)
+      axios.post('http://egco427-project-badapple47.c9users.io:8082/authen', newUser)
         .then((response) => {
           console.log(response.data)
           if(response.data.note == "success"){
@@ -193,7 +193,7 @@ export default {
             localStorage.setItem('Token', 'asdasdasdasd');
             localStorage.setItem('userID', response.data.userID);
             localStorage.setItem('username', this.User.username);
-           window.location.href = "http://localhost:8080/#/home"
+           window.location.href = "http://egco427-project-badapple47.c9users.io:8080/#/home"
 
           }
         })
