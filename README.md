@@ -167,7 +167,6 @@ events db
     ], 
     "view" : NumberInt(0)
 }
-
 { 
  
     "event" : "TRAM TOUR1", 
@@ -285,7 +284,8 @@ events db
 
 
 
-news db
+
+News DB
 
 { 
     "_id" : ObjectId("5af47948640a3503656c99f7"), 
@@ -341,5 +341,3 @@ news db
 ", 
 "view":0, 
 "location":"มหาวิทยาลัยมหิดล"}
-
-
