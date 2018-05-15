@@ -65,12 +65,12 @@
           <input type="text" class="form-control" placeholder="Name-Surname" v-model="User.nameEng">
         </div>
          <div class="form-group" >
-          <label class="pull-left">วันเกิด</label>
+          <label class="pull-left">วันเกิด *</label>
           
         <input class="form-control" id="date" name="student_dob" placeholder="DD/MM/YYYY" type="text" v-model="User.birthDate">
         </div>
         <div class="form-group" >
-          <label class="pull-left">เลขประจำตัวประชาชน<small style="color:grey;"> *ไม่เปิดเผยต่อสาธารณะ</small></label>
+          <label class="pull-left">เลขประจำตัวประชาชน *<small style="color:grey;"> *ไม่เปิดเผยต่อสาธารณะ</small></label>
           <input type="text" class="form-control" placeholder="เลขประจำตัวประชาชน" v-model="User.nationalID">
         </div>
         <div class="form-group" >
@@ -105,11 +105,11 @@
         <h3>ข้อมูลติดต่อ</h3>
         
         <div class="form-group" >
-          <label class="pull-left">อีเมลล์</label>
+          <label class="pull-left">อีเมลล์ *</label>
           <input type="text" class="form-control" placeholder="johnmedapple@gmail.com" v-model="User.email">
         </div>
         <div class="form-group" >
-          <label class="pull-left">เบอร์ติดต่อ</label>
+          <label class="pull-left">เบอร์ติดต่อ *</label>
           <input type="text" class="form-control" placeholder="086XXXXXXX" v-model="User.mobileNo">
         </div>
         <div class="form-group" >
@@ -144,7 +144,8 @@
             <h3 class="panel-title">ผิดพลาด</h3>
           </div>
           <div class="panel-body">
-            กรุณากรอกฟอร์มช่องที่มีเครื่องหมาย * ให้ครบทุกช่อง
+            <li v-for="error in errors"> - {{ error }} <br></li>
+
           </div>
         </div>
       
@@ -175,6 +176,7 @@ export default {
   name: 'UpdateUser',
   data () {
     return {
+      errors: [],
       warning1 : false ,
       warning2 : false ,
       msg: 'Update User',
@@ -195,19 +197,91 @@ export default {
         
 
       },
-      imageDefault: 'http://www.iphone-droid.net/wp-content/uploads/2013/09/Mamegoma-icon.png',
+      imageDefault: 'https://www.iphone-droid.net/wp-content/uploads/2013/09/Mamegoma-icon.png',
     }
   },
   methods: {
+    validateForm(){
+
+        
+       if(this.User.nameTH == ""   || this.User.nameTH == undefined ){
+        this.warning2 = true ;
+        this.errors.push("กรุณาตรวจสอบชื่อภาษาไทย");
+      }
+
+        if( this.User.nameEng == "" ||  this.User.nameEng == undefined ) {
+        this.warning2 = true ;
+        this.errors.push("กรุณาตรวจสอบชื่อภาษาอังกฤษ");
+      }
+
+      if( this.User.department == "" ||  this.User.department == undefined ) {
+        this.warning2 = true ;
+        this.errors.push("กรุณาตรวจสอบภาค");
+      }
+
+       if(this.validateEmail(this.User.email) == false ){
+        this.warning2 = true ;
+        console.log("email wrong format")
+        this.errors.push("กรุณาตรวจสอบอีเมลล์");
+
+      } 
+       if(this.User.nationalID.length != 13){
+        this.warning2 = true ;
+        this.errors.push("กรุณาตรวจสอบเลข 13 หลัก");
+
+      } 
+
+      if(this.User.studentID.length != 7){
+        this.warning2 = true ;
+        this.errors.push("กรุณาตรวจสอบเลขรหัสนักศึกษา");
+
+      } 
+
+      if(this.User.mobileNo.length != 10){
+        this.warning2 = true ;
+        this.errors.push("กรุณาตรวจสอบเบอร์โทรศัพท์");
+
+      } 
+
+      if(this.validateDate(this.User.birthDate == false)){
+        this.warning2 = true ;
+        this.errors.push("กรุณาเช็คฟอร์แมทของวันเกิด");
+
+      } 
+      
+    },
+    validateDate(date){
+
+  var pattern =/^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/;
+    pattern.test(date)
+    console.log('kkk')
+
+
+    },
+
+validateEmail(email){
+
+console.log("validateEmail ja")
+   var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+    
+  
+},
 
     updateToAPI () {
 
+  
+this.errors = []
+        this.validateForm()
 
-       if(this.User.nameTH == ""   || this.User.nameEng == "" || this.User.studentID == "" ||  this.User.department == "" || this.User.nameTH == undefined || this.User.nameEng == undefined || this.User.studentID == undefined || this.User.department == undefined ){
-        this.warning2 = true ;
-      }else{
+console.log(this.errors.length)
+        if(this.errors.length == 0){
+          this.warning2 = false;
 
-        console.log(this.User.imageUrl)
+        
+    
+
+     
 
 
              console.log("CLICK")
@@ -231,16 +305,16 @@ export default {
       axios.post('http://egco427-project-badapple47.c9users.io:8082/updatealumnia/' + this.$route.params.userId, newUser)
         .then((response) => {
           console.log(response)
-          window.location.href = "http://egco427-project-badapple47.c9users.io:8080/#/home"
+           window.location.href = "http://egco427-project-badapple47.c9users.io:8080/#/home"
 
         })
         .catch((error) => {
           console.log(error)
         })
 
+}
 
-
-      }
+      
 
 
  

@@ -99,6 +99,17 @@
           </div>
         </div>
         </div>
+        
+          <div class="modal-body">
+             <div class="panel panel-danger" v-if="registerSuccess == false">
+          <div class="panel-heading">
+            <h3 class="panel-title">ผิดพลาด</h3>
+          </div>
+          <div class="panel-body">
+            username นี้ถูกใช้ไปแล้ว
+          </div>
+        </div>
+        </div>
 
     <button  @click="register" class="btn btn-primary" tag="button" type="button" disabled v-if="registerSuccess == true">
               <span >Register</span>
@@ -137,7 +148,7 @@ export default {
         password: '',
       },
       checkConfirmPasswordPass: true,
-      registerSuccess: false
+      registerSuccess: null
     }
   },
   methods: {
@@ -145,6 +156,8 @@ export default {
     register () {
 
       if(this.User.password == this.User.confirmPassword){
+        
+        this.checkConfirmPasswordPass = true
 
         
 
@@ -157,9 +170,16 @@ export default {
       console.log(newUser)
       axios.post('http://egco427-project-badapple47.c9users.io:8082/register', newUser)
         .then((response) => {
-          console.log("this is authen response : "+response)
-          this.registerSuccess = true
-          this.checkConfirmPasswordPass = true
+          console.log("this is authen response : "+response.data)
+          
+         
+          
+          if(response.data == "can not insert duplicate user"){
+            this.registerSuccess = false
+  
+          }else{
+            this.registerSuccess = true
+          }
           
         })
         .catch((error) => {
