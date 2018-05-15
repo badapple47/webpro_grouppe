@@ -224,7 +224,7 @@ export default {
           
           this.events = response.data.eventArray;
           this.buttonCount = response.data.buttonCount;
-          console.log("this is event!!!!!!! : "+this.events.buttonCount);
+          //console.log("this is event!!!!!!! : "+this.events.buttonCount);
           //console.log("this is buttonCount : "+ this.events.buttonCount)
         })
         .catch(error => {
@@ -234,7 +234,7 @@ export default {
 					axios
         .get("http://egco427-project-badapple47.c9users.io:8082/news")
         .then(response => {
-          console.log("this is news"+ response.data)
+          //console.log("this is news"+ response.data)
           this.news = response.data;
           
         })

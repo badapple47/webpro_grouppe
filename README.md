@@ -1,21 +1,23 @@
-# vue-crud
+เป็นส่วนหนึ่งของวิชา egco 427 - web programming
 
-> A Vue.js project
+feature list
+- สมัครสมาชิก เพื่อเข้าใจเว็บไซต์
+- หน้ารวม News/event ข่าวที่หน้าสนใจของ มหาวิทยาลัย
+- Event แสดงคนใน Directory ที่สมัคร eventว่ามีใครบ้าง และสามารถสมัครได้ (หลังจากสมัครจะได้ QR code ที่เกิดจาก Eventid + UserId เพื่อเป็นตัวยืนยันการสมัคร) 
+- กระดานสารานุกรมของคณะวิศวะกรรมศาสตร์ สามารถกดเข้าไปดูข้อมูลส่วนตัวได้ และสามารถแก้ไขข้อมูลส่วนตัวของตัวเองได้
 
-## Build Setup
 
-``` bash
-# install dependencies
-npm install
+เขียนด้วย vue.js
 
-# serve with hot reload at localhost:8080
-npm run dev
+how to run
 
-# build for production with minification
-npm run build
+* don't forget cors toggle
 
-# build for production and view the bundle analyzer report
-npm run build --report
-```
+- npm install
+- npm start
+- สร้าง collection ของ MongoDB ชื่อ events news และ users
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+ตัว json ของ db อยู่ในไฟล์ชื่อ newsdb.json / eventdb.json
+
+
